@@ -1,0 +1,81 @@
+﻿<!DOCTYPE>
+<html>
+<head>
+	<title>考务管理系统-登录</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- 新 Bootstrap 核心 CSS 文件 -->
+	<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> 
+	<!-- 可选的Bootstrap主题文件（一般不使用） -->
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"></script>
+	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="./resources/script/login.js"></script>
+	<link rel="stylesheet" href="./resources/css/login.css">
+</head>
+<body style="background:url('./resources/image/loginBackground.jpeg')">
+
+<div class="container">
+	<div class="clear"></div>
+
+	<div class="row">
+		<center>
+		<h1><strong>考务系统<sup>2018</sup></strong></h1>
+		</center>
+	</div>
+     <div class="clear2"></div>
+	<div class="row" style="height:600px;">
+	<div class="col-md-4"></div>
+	<div class="col-md-4" id="whole">
+	    <form class="form-horizontal" role="form" onsubmit="return false" action="##" method="post">
+		    <div class="form-group">
+		    	<div id="userCue" class="jianyi" style="text-align:center;padding-top:20px;color:grey;">/*请注意格式*/</div>
+		    </div>
+	    	<div class="form-group">
+		         <center style="font-size:18px">
+					<label class="radio-inline">
+						<input type="radio" name="optionsRadios" id="optionsRadios1" value="1" checked> 管理员
+					</label>
+
+
+					<label class="radio-inline">
+						<input type="radio" name="optionsRadios" id="optionsRadios2" value="2">教师
+					</label>
+
+
+					<label class="radio-inline">
+						<input type="radio" name="optionsRadios" id="optionsRadios3" value="3">学生
+					</label>
+				</center>
+		
+	    	</div>
+			
+	    	<div class="form-group" >
+           
+	    	<label for="stunumber" class="col-md-4 control-label" id="stunum">学号：</label>
+	    	<div class="col-md-8" style="width:240px">
+	    		<input type="text" class="form-control" id="stunumber" placeholder="请输入学号" maxlength=9;>
+	    	</div>
+	    	</div>
+	    	<div class="form-group">
+	    	<label for="psw" class="col-md-4 control-label" id="fontstyle">密码：</label>
+	    	<div class="col-md-8" style="width:240px">
+	    		<input type="password" class="form-control" id="psw" placeholder="请输入密码">
+	    	</div>
+	    	</div>
+	    	<div class="form-group" id="regbox" style="padding-left:150px;padding-right:100px; ">
+	    		<input type="submit" class="btn btn-primary btn-block" id="reg" onclick="return validateForm()" value="登录">
+	    	</div>
+	    </form>
+	</div>
+	<div class="col-md-4"></div>
+    	
+    </div>
+
+</div>
+
+
+</div>
+</body>
+</html>

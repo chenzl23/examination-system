@@ -1,0 +1,42 @@
+.clear{
+	height:150px;
+
+}
+.clear2{
+	height:50px;
+
+}
+#fontstyle{
+	font-size:20px;
+}
+.body{
+	background: url("./Code/timg.jpg");
+}
+.border{
+
+	background-color: white;
+	opacity: 0.8;
+}
+h1{
+	font-weight: bold;
+	 text-shadow: 5px 5px 5px #ffffff;
+}
+#whole{
+	background-color:white;opacity:0.8;
+	box-shadow: 10px 10px 5px grey；
+	
+}
+#stunum{
+	font-size:20px;
+}
+#userCue{
+
+}
+
+.error{
+	border: 1px solid red;
+	box-shadow: 0 0 2px red;
+}
+
+
+

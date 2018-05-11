@@ -1,0 +1,192 @@
+body{
+    background: rgb(245, 245, 245);
+}
+#container{
+    font-family: Arial, Helvetica, sans-serif;               
+    font-size: 16px;
+    width: 1000px;
+    margin: auto;
+    white-space:nowrap;
+    overflow:hidden;
+}
+
+a{
+    text-decoration:none;
+    color: rgb(13, 56, 92);
+} 
+a:hover{
+    color: rgb(73, 117, 153);
+    font-weight: 110%;
+    font-size: 110%;
+}
+a:active{
+    color: rgb(7, 97, 165);
+}
+
+li{
+    list-style-type:none;
+}
+
+
+#header{
+    font-size: 100%;
+    background: rgb(230, 230, 230);
+    border-radius: 5px;
+    position: relative;
+    margin-bottom: 1em;
+}
+#header h1{
+    padding:1em 1em 0em 1em;
+    color: rgb(0, 100, 150);
+}
+#header h1:hover{
+    color: rgb(0, 109, 160);
+}
+#header p{
+    padding:0em 1em 1em 2em;
+    color: rgb(77, 116, 131);
+}
+.inline{
+    position: relative;
+    display: inline-block;
+}
+#btnLogout{
+    position: absolute;
+    right:2em;
+    bottom: 2em;
+    padding: 0.3em 1em;
+    border: none;
+    border-radius: 0.7em;
+    color: rgb(37, 116, 180);
+}
+#btnLogout:hover{
+    color: rgb(13, 56, 92);
+    background-color:rgb(165, 165, 165);
+    box-shadow: 0px 0px 10px #3f4c5e;
+}
+#btnLogout:active{
+    color: rgb(8, 33, 54);
+    background-color:rgb(150, 150, 150);
+}
+
+
+#menu{
+    position: relative;
+    width:19%;
+    float:left;
+    font-size: 100%;
+    background: rgb(230, 230, 230);
+    border-radius: 5px;
+    margin-bottom: 1em;
+    min-height: 500px;
+}
+.first_menu{
+    margin:5px;
+    text-indent:-20px;
+}
+.second_menu{
+    margin:5px;
+    text-indent:-40px;
+}
+.third_menu{
+    margin:5px;
+    text-indent:-60px;
+}
+
+.chosenMenu{
+    color: rgb(0, 147, 192);
+}
+
+
+#content{
+    position: relative;
+    width:80%;
+    float:right;
+    font-size: 100%;
+    background: rgb(230, 230, 230);
+    border-radius: 5px;
+    margin-bottom: 1em;
+    min-height: 500px;
+}
+#importStudent{
+    width:90%;
+    margin:auto;
+}
+.title{
+    font-size: 25px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: rgb(4, 62, 92);
+    width: 20%;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 80px;
+}
+.title:hover{
+    color: rgb(7, 87, 124);
+}
+#import{
+    margin-left: 120px;
+    margin-bottom: 80px;
+}
+.file{
+    display: none;
+}
+.input{
+    width:300px;
+    height:23px;
+    color: rgb(77, 84, 99);
+    background-color:rgb(250, 250, 250);
+    border:1px solid rgb(121, 121, 121);
+    border-radius: 5px;
+}
+.input:hover,.input:focus{
+    border:1px solid rgb(74, 151, 165);
+    box-shadow: 0px 0px 5px #3f4c5e;
+}
+#URLText{
+    margin-right: 10px;
+}
+.button{
+    width:80px;
+    height: 30px;
+    background-color:rgb(250, 250, 250);
+    color: rgb(77, 84, 99);
+    border:1px solid rgb(121, 121, 121);
+    border-radius: 5px;
+    margin-right: 10px;
+}
+.button:hover{
+    border:1px solid rgb(74, 151, 165);
+    box-shadow: 0px 0px 5px #3f4c5e;
+    background-color:rgb(245, 245, 245);
+    cursor: pointer;
+}
+.button:active{
+    background-color:rgb(235, 235, 235);
+}
+.remind{
+    color: rgb(77, 116, 131);
+}
+#example p{
+    margin-left: 50px;
+}
+img{
+    border:1px solid rgb(0, 100, 150);
+    border:1px solid rgb(121, 121, 121);
+    border-radius: 3px;
+}
+img:hover{
+    width:105%;
+    margin-left: -5px;
+    margin-top: -3px;
+    border:1px solid rgb(74, 151, 165);
+    box-shadow: 0px 0px 5px #3f4c5e;
+}
+
+
+
+
+
+
+
