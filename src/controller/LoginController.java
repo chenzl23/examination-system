@@ -22,6 +22,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/user")
 
+/*登录控制*/
 public class LoginController {
 
     @RequestMapping(value = "/login" ,method = RequestMethod.POST)
