@@ -7,8 +7,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../../resources/css/teacher.css">
-  <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+   <script src="../../resources/script/jquery-3.3.1.js"></script>
+    <script src="../../resources/script/jquery-3.3.1.min.js"></script>
   <script src="../../resources/script/teacher.js"></script>
+  <link href="../../resources/css/bootstrap.css" rel="stylesheet">
+  <link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../resources/css/bootstrap-table.css">
+  <script src="../../resources/script/bootstrap.min.js"></script>
+  <script src="../../resources/script/bootstrap-table.js"></script>
+  <script src="../../resources/script/bootstrap-table-zh-CN.js"></script>
+  <script src = "../../resources/script/bootstrap-table-editable.js" > </script>
+  <script src = "../../resources/script/bootstrap-editable.js" > </script>
+  <script src = "../../resources/script/bootstrap-editable.min.js" > </script>
+  <link href="../../resources/css/bootstrap-editable.css" rel="stylesheet">
+
 </head>
 <body>
 <div id="wrapper">
@@ -96,14 +108,8 @@
         </div><!-- /search -->
 
         <div id="stuInfo" class="middle">
-          <div>
-              <input type="text" class="inputText" placeholder="学生学号">
-              <input type="text" class="inputText" placeholder="学生姓名">
-              <input id="btnSelectStu" type="button" class="button" value="查询">
-              <input id="btnRefresh" type="button" class="button" value="刷新">
-          </div>
 
-          <table class="table">
+          <table  data-toggle="table">
             <thead>
               <tr>
                 <th>学生学号</th>
@@ -116,13 +122,11 @@
                  <th>入学年份</th>
               </tr>
             </thead>
-            <tfoot>
-            </tfoot>
             <tbody>
             <c:forEach items="${list}" var="line" >
                 <tr>
-                    <td>${line.id}</td>
-                    <td>${line.name}</td>
+                    <td><a class="username"> ${line.id}</a></td>
+                    <td><a class="name">${line.name}</a></td>
                     <td>${line.birth}</td>
                     <td>${line.tel}</td>
                     <td>${line.email}</td>
@@ -143,5 +147,7 @@
     </div><!-- /footer -->
 
   </div><!-- /container -->
+<script src="../../resources/script/edit.js"></script>
 </body>
+
 </html>

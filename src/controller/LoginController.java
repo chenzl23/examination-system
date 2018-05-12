@@ -2,6 +2,7 @@ package controller;
 
 import bean.LoginUser;
 import dao.UsersDao;
+import helper.KeyGenerator;
 import model.Users;
 import java.lang.Object;
 import org.springframework.stereotype.Controller;
@@ -71,6 +72,11 @@ public class LoginController {
             user.setState("false");
             return user;
         }
+        //生成登录key
+        /*
+        String key = KeyGenerator.createKey((Integer)httpSession.getAttribute("role"));
+        httpSession.setAttribute("key",key);
+        */
         httpSession.setAttribute("username",user.getUsername());
         httpSession.setAttribute("role",user.getRole());
         return user;

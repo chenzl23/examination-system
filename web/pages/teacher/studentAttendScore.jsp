@@ -8,6 +8,12 @@
   <link rel="stylesheet" href="../../resources/css/teacher.css">
   <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="../../resources/script/teacher.js"></script>
+  <link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../resources/css/bootstrap-table.css">
+  <script src="../../resources/script/jquery.min.js"></script>
+  <script src="../../resources/script/bootstrap.min.js"></script>
+  <script src="../../resources/script/bootstrap-table.js"></script>
+  <script src="../../resources/script/bootstrap-table-zh-CN.js"></script>
 </head>
 <body>
 
@@ -101,7 +107,7 @@
               <input id="btnRefreshAttendScore" type="button" class="button" value="刷新">
           </div>
           
-          <table class="table">
+          <table id="table"class="table table-striped table-bordered table-hover">
             <thead>
               <tr>
                 <th>学生学号</th>
