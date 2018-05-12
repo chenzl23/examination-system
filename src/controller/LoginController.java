@@ -1,8 +1,11 @@
 package controller;
 
 import bean.LoginUser;
+import dao.LogDao;
 import dao.UsersDao;
 import helper.KeyGenerator;
+import helper.TimeHelper;
+import model.Log;
 import model.Users;
 import java.lang.Object;
 import org.springframework.stereotype.Controller;
@@ -12,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -74,6 +79,30 @@ public class LoginController {
         System.out.println(user.getUsername());
         String key = KeyGenerator.createKey(user.getRole());
         //保存key到数据库
+        try
+        {
+            LogDao ldao = new LogDao();
+            Log log_item = ldao.searchSingleLog(Integer.parseInt(user.getUsername()));
+            Log log = new Log();
+            if (log_item == null)
+            {
+                log.setLogin_time(TimeHelper.getCurrentTime());
+                log.setKey(key);
+                log.setLogin_id(Integer.parseInt(username));
+                ldao.addLog(log);
+            }
+            else
+            {
+                log_item.setKey(key);
+                log_item.setLogin_time(TimeHelper.getCurrentTime());
+                ldao.updateLog(log_item);
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+
         user.setKey(key);
 
         httpSession.setAttribute("key",key);

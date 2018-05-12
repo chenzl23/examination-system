@@ -9,6 +9,7 @@ import java.util.*;
 public class DBUtil {
 
     //这里可以设置数据库名称
+    /*
     private static final String URL="jdbc:sqlserver://czl233.database.windows.net:1433;" +
             "database=jwch;" +
             "user=czl;password=V9._pWQvt\\xU?c8F2;" +
@@ -16,7 +17,14 @@ public class DBUtil {
             "hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
     private static final String USER="czl";
     private static final String PASSWORD="V9._pWQvt\\-xU?c8F2";
-
+    */
+    private static final String URL="jdbc:sqlserver://localhost;" +
+            "database=jwch;" +
+            "user=sa;password=961024;" +
+            "encrypt=true;trustServerCertificate=true;" +
+            "hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
+    private static final String USER="sa";
+    private static final String PASSWORD="961024";
     private static Connection conn=null;
 
     //（将加载驱动、连接数据库放入静态块中），并对外提供一个方法来获取数据库连接

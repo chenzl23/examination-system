@@ -94,11 +94,11 @@
         <div id="importStudent">
           <p class="title">导入学生信息</p>
           <div id="import">
-            <input type="file" id="file" class="file" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
-            <input type="text" id="URLText" class="input" placeholder="请输入URL">
-            <input type="button" id="btnChooseFile" class="button" value="选择文件">
+            <form method="POST"  enctype="multipart/form-data" id="form1" action="#">
+            <input type="file" id="file" class="file" name="file">
             <input type="button" id="btnConfirm" class="button" value="导入">
             <p class="remind">提示：请选择内容为<strong>学生信息</strong>的Excel表格</p>
+            </form>
           </div>
           <div id="example">
             <p class="remind">Excel表格格式如下：</p>

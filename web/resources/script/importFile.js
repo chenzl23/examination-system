@@ -25,11 +25,32 @@ $(document).ready(function(){
     $("#btnConfirm").click(function(){
         if(true) //URL存在并且文件内容格式正确
         {
+            alert("开始上传");
             //TODO:后端录入文本框中的学生信息Excel文件
-            alert("导入学生信息成功");
+
+            var file = $('#file').prop('files');
+            var formdata = new FormData();
+            formdata.append('file',file[0]);
+            $.ajax({
+                url: '/upload/stuinfo' ,
+                type: 'post',
+                data: formdata,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (result) {
+                    alert("上传成功");
+                },
+                error:function (result) {
+                    alert("上传失败");
+                    console.log(formdata.get("file"));
+                }
+            });
+
         }
     })
-    
+
 
     $("#btnConfirmAttendScore").click(function(){
         if(true) //URL存在并且文件内容格式正确
