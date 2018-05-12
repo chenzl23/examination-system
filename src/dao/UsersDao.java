@@ -10,35 +10,47 @@ import java.util.List;
  *
  */
 public class UsersDao {
-    Connection connUser=DBUtil.getConnection();
+    Connection connUser=(new DBUtil()).getConnection();
     /************添加用户*************/
-    public void addUsers(Users u)throws SQLException{//通过PreparedStatement执行动态SQL语句
-        String sql="insert into tb_users (id,passwd,role_id) values(?,?,?)";
-        PreparedStatement pstmt=connUser.prepareStatement(sql);
-        pstmt.setString(1,u.getId());
-        pstmt.setString(2,u.getPasswd());
-        pstmt.setInt(3,u.getRole_id());
-        pstmt.execute();
+    public boolean  addUsers(Users u)throws SQLException{//通过PreparedStatement执行动态SQL语句
+        if(searchSingle(u.getId())!=null) return false;
+        else {
+            String sql = "insert into tb_users (id,passwd,role_id) values(?,?,?)";
+            PreparedStatement pstmt = connUser.prepareStatement(sql);
+            pstmt.setString(1, u.getId());
+            pstmt.setString(2, u.getPasswd());
+            pstmt.setInt(3, u.getRole_id());
+            pstmt.execute();
+            return true;
+        }
     }
     /************添加用户信息*************/
     //
     /************修改用户信息*************/
-    public void updateUsers(Users u)throws SQLException{
-        String sql="update tb_users set passwd=?,role_id=? where id=?";
-        PreparedStatement pstmt=connUser.prepareStatement(sql);
-        pstmt.setString(1,u.getPasswd());
-        pstmt.setInt(2,u.getRole_id());
-        pstmt.setString(3,u.getId());
-        pstmt.execute();
+    public boolean updateUsers(Users u)throws SQLException{
+        if(searchSingle(u.getId())==null) return false;
+        else {
+            String sql = "update tb_users set passwd=?,role_id=? where id=?";
+            PreparedStatement pstmt = connUser.prepareStatement(sql);
+            pstmt.setString(1, u.getPasswd());
+            pstmt.setInt(2, u.getRole_id());
+            pstmt.setString(3, u.getId());
+            pstmt.execute();
+            return true;
+        }
     }
     /************修改用户信息*************/
     //
     /************删除用户信息*************/
-    public void deleteUsers(String id)throws SQLException{
-        String sql="delete from tb_users where id=?";
-        PreparedStatement pstmt=connUser.prepareStatement(sql);
-        pstmt.setString(1,id);
-        pstmt.execute();
+    public boolean deleteUsers(String id)throws SQLException{
+        if(searchSingle(id)!=null) return false;
+        else {
+            String sql = "delete from tb_users where id=?";
+            PreparedStatement pstmt = connUser.prepareStatement(sql);
+            pstmt.setString(1, id);
+            pstmt.execute();
+            return true;
+        }
     }
     /************删除用户信息*************/
     //

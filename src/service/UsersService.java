@@ -8,16 +8,16 @@ import java.util.List;
 public class UsersService {
       UsersDao ud=new UsersDao();
       /**add**/
-      public void addService(Users u)throws SQLException {
-          ud.addUsers(u);
+      public boolean addService(Users u)throws SQLException {
+          return ud.addUsers(u);
       }
       /**update**/
-    public void updateService(Users u)throws SQLException{
-          ud.updateUsers(u);
+    public boolean updateService(Users u)throws SQLException{
+          return ud.updateUsers(u);
     }
     /**delete**/
-    public void deleteService(String id)throws SQLException{
-          ud.deleteUsers(id);
+    public boolean deleteService(String id)throws SQLException{
+          return ud.deleteUsers(id);
     }
     /**searchSingle**/
     public Users searchSingleService(String id)throws SQLException{

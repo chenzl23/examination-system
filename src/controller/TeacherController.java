@@ -19,9 +19,6 @@ import java.util.List;
 @RequestMapping("/teacher")
 public class TeacherController {
 
-    //无参数的首页
-    //该接口仅为超级管理员提供
-    //老师重定向到下一接口
     @RequestMapping(value = "/index",method = RequestMethod.GET)
     public String index(@RequestParam("key") String key,Model model,HttpSession session)
     {

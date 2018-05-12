@@ -9,20 +9,20 @@ public class RolesService {
     RolesDao rd=new RolesDao();
 
     /**addRoles**/
-    public void addRService(Roles r)throws SQLException {
-        rd.addRoles(r);
+    public boolean addRService(Roles r)throws SQLException {
+        return rd.addRoles(r);
     }
     /**updateRoles**/
-    public void updateRService(Roles r)throws SQLException{
-        rd.updateRoles(r);
+    public boolean updateRService(Roles r)throws SQLException{
+       return rd.updateRoles(r);
     }
     /**deleteRoles**/
-    public void deleteRService(int role_id)throws SQLException{
-        rd.deleteRole(role_id);
+    public boolean deleteRService(int role_id)throws SQLException{
+        return rd.deleteRole(role_id);
     }
     /**searchSingleRoles**/
-  public void  searchSRService(int role_id)throws  SQLException{
-        rd.searchSingleRole(role_id);
+  public Roles searchSRService(int role_id)throws  SQLException{/**@// TODO: 2018/5/12 修改 bug：漏了返回值 **/
+        return rd.searchSingleRole(role_id);
   }
   /**searchAllRoles**/
     public List<Roles> searchARService()throws SQLException{

@@ -69,19 +69,27 @@ function validateForm() {
         	success: function (data) {
 				if (data.state == "true")
 				{
-                    window.location.href="/index";
+					if (data.role == "1") window.location.href="/super/index?key="+data.key;
+					else if (data.role == "2") window.location.href="/teacher/index"+data.key;
+					else window.location.href="/teacher/student"+data.key;
+
 				}
 				else if (data.state == "valid")
 				{
 					alert("已有用户登录，现直接跳转");
-                    window.location.href="/index";
+                    if (data.role == "1") window.location.href="/super/index?key="+data.key;
+                    else if (data.role == "2") window.location.href="/teacher/index"+data.key;
+                    else window.location.href="/teacher/student"+data.key;
 				}
 				else
 				{
                     $('#userCue').html("<font color='red'><b>/*账号或密码错误*/</b></font>");
 				}
-        	}
-    	});
+        	},
+            error : function(data) {
+                alert("请求失败");
+            }
+        });
 
 
 }

@@ -8,19 +8,20 @@ import java.text.DecimalFormat;
  * @// TODO: 2018/5/8 17:36
  */
 public class Stuinfo {
-    private String id;//学号
+    private String s_id;//学号
     private String name;
     private Date birth;
     private String photo;//记录照片在服务器的路径
     private String tel;
     private String email;
-    private int major;//专业，引用专业表中的id
+    /**@// TODO: 2018/5/10 将stuinfo中的类中major修改成专业名称 **/
+    private String major;//专业，引用专业表中的id
     private int enrollyear;//入学年份
     private double credit_got;//已获学分
     private double credit_need;//需获学分
     //setters
 
-    public void setId(String id) { this.id = id; }
+    public void setId(String s_id) { this.s_id = s_id; }
 
     public void setName(String name) { this.name = name; }
 
@@ -32,7 +33,7 @@ public class Stuinfo {
 
     public void setEmail(String email) { this.email = email; }
 
-    public void setMajor(int major) { this.major = major; }
+    public void setMajor(String major) { this.major = major; }
 
     public void setEnrollyear(int enrollyear) { this.enrollyear = enrollyear; }
 
@@ -41,7 +42,7 @@ public class Stuinfo {
     public void setCredit_need(double credit_need) { this.credit_need = credit_need; }
     //getters
 
-    public String getId() { return id; }
+    public String getId() { return s_id; }
 
     public String getName() { return name; }
 
@@ -53,7 +54,7 @@ public class Stuinfo {
 
     public String getEmail() { return email; }
 
-    public int getMajor() { return major; }
+    public String getMajor() { return major; }
 
     public int getEnrollyear() { return enrollyear; }
 

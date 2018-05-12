@@ -7,24 +7,31 @@ import java.util.List;
 
 public class TeachinfoService {
     TeachinfoDao td=new TeachinfoDao();
+
     /**addTeachinfo**/
-    public void addTeachinfoService(Teachinfo t)throws SQLException{
-        td.addTeachinfo(t);
+    public boolean addTeachinfoService(Teachinfo t)throws SQLException{
+        return td.addTeachinfo(t);
     }
     /**updateTeachinfo**/
-    public void updateTeachinfoService(Teachinfo t)throws SQLException{
-        td.updateTeachinfo(t);
+    public boolean updateTeachinfoService(Teachinfo t)throws SQLException{
+        return td.updateTeachinfo(t);
     }
     /**deleteTeachinfo**/
-    public void deleteTeachinfoService(String id)throws SQLException{
-        td.deleteUsers(id);
+    public boolean deleteTeachinfoService(String t_id)throws SQLException{
+        return td.deleteTeachinfo(t_id);
     }
     /**searchSingleTeachinfo**/
-    public Teachinfo searchSingleTeachinfoService(String id)throws SQLException{
-        return td.searchSingleTeachinfo(id);
+    public Teachinfo searchSingleTeachinfoService(String t_id)throws SQLException{
+        return td.searchSingleTeachinfo(t_id);
     }
     /**searchAllTeachinfo**/
     public List<Teachinfo> searchAllTeachinfoService()throws SQLException{
         return td.searchAllTeachinfo();
     }
+    /**searchTeachinfoByName**/
+    public Teachinfo searchTeachinfoByNameService(String t_name)throws SQLException{
+        return td.searchTeachinfoByName(t_name);
+    }
+
+
 }

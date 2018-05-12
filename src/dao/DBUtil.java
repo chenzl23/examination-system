@@ -18,8 +18,9 @@ public class DBUtil {
     private static final String PASSWORD="V9._pWQvt\\-xU?c8F2";
 
     private static Connection conn=null;
-    //静态代码块（将加载驱动、连接数据库放入静态块中）
-    static{
+
+    //（将加载驱动、连接数据库放入静态块中），并对外提供一个方法来获取数据库连接
+    public  Connection getConnection(){
         try {
             //1.加载驱动程序
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -30,10 +31,6 @@ public class DBUtil {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    //对外提供一个方法来获取数据库连接
-    public static Connection getConnection(){
         return conn;
     }
     public void CloseConnection(){

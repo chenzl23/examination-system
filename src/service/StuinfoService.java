@@ -13,20 +13,20 @@ import java.util.List;
 public class StuinfoService {
     StuinfoDao sd=new StuinfoDao();
     /**addStuinfo**/
-    public void addSService(Stuinfo si)throws SQLException{
-        sd.addStuinfo(si);
+    public boolean addSService(Stuinfo si)throws SQLException{
+       return sd.addStuinfo(si);
     }
     /**updateStuinfo**/
-    public void updateSService(Stuinfo si)throws SQLException{
-        sd.updateStuinfo(si);
+    public boolean updateSService(Stuinfo si)throws SQLException{
+        return sd.updateStuinfo(si);
     }
     /**deleteStuinfo**/
-    public void deleteSService(String id)throws SQLException{//删除某个学生
-        sd.deleteStuinfo(id);
+    public boolean deleteSService(String s_id)throws SQLException{//删除某个学生
+            return sd.deleteStuinfo(s_id);
     }
     /**searchSingleStuinfo**/
-    public Stuinfo searchSStuinfoService(String id)throws SQLException{//查找单个学生信息
-        return sd.searchSingleStuinfo(id);
+    public Stuinfo searchSStuinfoService(String s_id)throws SQLException{//查找单个学生信息
+        return sd.searchSingleStuinfo(s_id);
     }
     /**searchAllStuinfo**/
     public List<Stuinfo> searchAStuinfoService()throws SQLException{

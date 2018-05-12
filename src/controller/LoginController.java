@@ -33,13 +33,15 @@ public class LoginController {
         if (httpSession.getAttribute("username")!=null)
         {
             user.setState("valid");
+            user.setUsername((String)httpSession.getAttribute("username"));
+            user.setRole((Integer) httpSession.getAttribute("role"));
+            user.setKey((String)httpSession.getAttribute("key"));
             return user;
         }
         UsersDao dao = new UsersDao();
         Users u = null;
         try {
             u = dao.searchSingle(username);
-            System.out.println(u.getPasswd());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -54,7 +56,6 @@ public class LoginController {
             user.setState("false");
             return user;
         }
-        user.setPsw(psw);
         user.setUsername(username);
         user.setState("true");
         switch (role)
@@ -70,10 +71,12 @@ public class LoginController {
             return user;
         }
         //生成登录key
-        /*
-        String key = KeyGenerator.createKey((Integer)httpSession.getAttribute("role"));
+        System.out.println(user.getUsername());
+        String key = KeyGenerator.createKey(user.getRole());
+        //保存key到数据库
+        user.setKey(key);
+
         httpSession.setAttribute("key",key);
-        */
         httpSession.setAttribute("username",user.getUsername());
         httpSession.setAttribute("role",user.getRole());
         return user;

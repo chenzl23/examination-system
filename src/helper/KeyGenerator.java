@@ -11,6 +11,7 @@ public class KeyGenerator {
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         String createdate = sdf.format(date);
-        return createdate+String.valueOf(role)+String.valueOf(num0);
+        String key = createdate+String.valueOf(num0)+String.valueOf(role);
+        return key;
     }
 }

@@ -19,7 +19,8 @@ public class SuperController {
     @RequestMapping(value = "/index",method = RequestMethod.GET)
     public String index(@RequestParam("key") String key,Model model, HttpSession session)
     {
-        if (!key.equals((String)session.getAttribute("key")))
+        //判断登录权限
+        if (session.getAttribute("key")==null)
         {
             model.addAttribute("message","非法操作");
             return "/common/error";
@@ -32,17 +33,19 @@ public class SuperController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        model.addAttribute("base_url","super");
         return "/teacher/index";
     }
 
     @RequestMapping(value = "/importStudentInfo",method = RequestMethod.GET)
     public String importStudentInfo(@RequestParam("key") String key,Model model,HttpSession session)
     {
-        if (!key.equals((String)session.getAttribute("key")))
+        if (false)
         {
             model.addAttribute("message","非法操作");
             return "/common/error";
         }
+        model.addAttribute("base_url","super");
         return "/teacher/importStudentInfo";
     }
 
