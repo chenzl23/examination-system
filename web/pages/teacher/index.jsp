@@ -7,19 +7,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../../resources/css/teacher.css">
-   <script src="../../resources/script/jquery-3.3.1.js"></script>
-    <script src="../../resources/script/jquery-3.3.1.min.js"></script>
-  <script src="../../resources/script/teacher.js"></script>
-  <link href="../../resources/css/bootstrap.css" rel="stylesheet">
   <link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
   <link href="../../resources/css/bootstrap-table.css">
+  <link href="../../resources/css/bootstrap-editable.css" rel="stylesheet">
+
+  <script src="../../resources/script/jquery.min.js"></script>
   <script src="../../resources/script/bootstrap.min.js"></script>
   <script src="../../resources/script/bootstrap-table.js"></script>
   <script src="../../resources/script/bootstrap-table-zh-CN.js"></script>
-  <script src = "../../resources/script/bootstrap-table-editable.js" > </script>
-  <script src = "../../resources/script/bootstrap-editable.js" > </script>
-  <script src = "../../resources/script/bootstrap-editable.min.js" > </script>
-  <link href="../../resources/css/bootstrap-editable.css" rel="stylesheet">
+  <script src="../../resources/script/bootstrap-editable.min.js"> </script>
+  <script src="../../resources/script/bootstrap-table-editable.js"> </script>
+  <script src="../../resources/script/teacher.js"></script>
+  <script src="../../resources/script/table.js"></script>
 
 </head>
 <body>
@@ -109,7 +108,7 @@
 
         <div id="stuInfo" class="middle">
 
-          <table  data-toggle="table">
+          <table  id="tb_info">
             <thead>
               <tr>
                 <th>学生学号</th>
@@ -125,8 +124,8 @@
             <tbody>
             <c:forEach items="${list}" var="line" >
                 <tr>
-                    <td><a class="username"> ${line.id}</a></td>
-                    <td><a class="name">${line.name}</a></td>
+                    <td> ${line.id}</td>
+                    <td>${line.name}</td>
                     <td>${line.birth}</td>
                     <td>${line.tel}</td>
                     <td>${line.email}</td>
@@ -147,7 +146,6 @@
     </div><!-- /footer -->
 
   </div><!-- /container -->
-<script src="../../resources/script/edit.js"></script>
 </body>
 
 </html>
