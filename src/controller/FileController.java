@@ -26,7 +26,6 @@ public class FileController {
     @ResponseBody
     public  String  uploadExcel(HttpServletRequest request,HttpServletResponse response) {
         try {
-            System.out.println("通过传统方式form表单提交方式导入excel文件2334！");
             MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
             System.out.println("通过传统方式form表单提交方式导入excel文件！");
 
