@@ -12,7 +12,7 @@ public class CoursesDao {
          信息表中，存在则不允许添加)**/
         if(searchSingleCourse(cs.getC_id())!=null)return false;
         else {
-            String sql = "insert into tb_courses (c_id,c_name,grade,credit) values(?,?,?,?)";
+            String sql = "insert into tb_courses (id,c_name,grade,credit) values(?,?,?,?)";
             PreparedStatement pstmt = connCourse.prepareStatement(sql);
             pstmt.setInt(1, cs.getC_id());
             pstmt.setString(2, cs.getC_name());
@@ -30,7 +30,7 @@ public class CoursesDao {
         if(searchSingleCourse(cs.getC_id())==null)return false;
         else
         {
-            String sql="update tb_courses set name=?,grade=?,credit=? where id=?";
+            String sql="update tb_courses set c_name=?,grade=?,credit=? where id=?";
             PreparedStatement pstmt=connCourse.prepareStatement(sql);
             pstmt.setString(1,cs.getC_name());
             pstmt.setInt(2,cs.getGrade());
@@ -71,7 +71,7 @@ public class CoursesDao {
         while (rs.next()){
             cs=new Courses();
             cs.setC_id(rs.getInt("id"));
-            cs.setC_name(rs.getString("name"));
+            cs.setC_name(rs.getString("c_name"));
             cs.setGrade(rs.getInt("grade"));
             cs.setCredit(rs.getDouble("credit"));
         }
@@ -83,7 +83,7 @@ public class CoursesDao {
     /*****通过课程名称c_name查询某个课程的信息******/
     public Courses searchCourseByName(String name)throws SQLException{
         Courses cs=null;
-        String sql="select * from tb_courses where name=?";
+        String sql="select * from tb_courses where c_name=?";
         PreparedStatement pstmt=connCourse.prepareStatement(sql);
         pstmt.setString(1,name);
         ResultSet rs=pstmt.executeQuery();
@@ -117,7 +117,7 @@ public class CoursesDao {
         while(rs.next()){
             cst=new Courses();
             cst.setC_id(rs.getInt("id"));
-            cst.setC_name(rs.getString("name"));
+            cst.setC_name(rs.getString("c_name"));
             cst.setGrade(rs.getInt("grade"));
             cst.setCredit(rs.getDouble("credit"));
             coursesList1.add(cst);

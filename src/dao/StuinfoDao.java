@@ -17,7 +17,7 @@ public class StuinfoDao {
     public boolean addStuinfo(Stuinfo s)throws SQLException{//通过PreparedStatement执行动态SQL语句
         if(searchSingleStuinfo(s.getId())!=null) return false;
         else {
-            String sql = "insert into tb_stuinfo (id,name,birth,photo,tel,email,major,enrollyear,credit_got,credit_need) values(?,?,?,?,?,?,?,?,?,?)";
+            String sql = "insert into tb_stuinfo (id,name,birth,photo,tel,email,major,enroll_year,credit_got,credit_need) values(?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement pstmt = connStu.prepareStatement(sql);
             pstmt.setString(1, s.getId());
             pstmt.setString(2, s.getName());

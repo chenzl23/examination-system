@@ -23,7 +23,7 @@
 <body>
 <div id="wrapper">
 <%@ include file="/pages/common/header.jsp" %>
-<%@ include file="/pages/common/teacher_menu.jsp" %>
+<%@ include file="/pages/common/super_menu.jsp" %>
 
       
 

@@ -15,7 +15,7 @@ bootstrap-table/
     ├── extensions/
     ├── locale/
     ├── bootstrap-table.css
-    └── bootstrap-table.js
+    └── bootstrap-table_stuinfo.js
 ```
 
 Los folders `src/`, `locale/`, y `extensions/` son el código fuente de CSS, JS. El folder `dist/` inclute todo compilado y minificado con `src/`. El folder `docs/` incluye el código fuente de la documentación. Además de eso, se incluye archivos de soporte para packages, información de licencia, y desarrollo.

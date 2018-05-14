@@ -6,6 +6,7 @@ $(document).ready(function () {
         search: true,//启用搜索框
         showRefresh: true,//启用刷新按钮
         showColumns:true,
+        searchAlign:'left',
         sortName:"id" ,
 
         onRefresh: function () {//刷新事件
@@ -17,10 +18,10 @@ $(document).ready(function () {
              * field：刚刚修改的列的Id，就是下面columns数组里的field
              * row：修改项所在行
              * 具体的值就是像  row.id   row.name  row.birth ... 这样子的
-             * 
-             * 
+             *
+             *
              * 这里写ajax方法保存输入框输入的值
-             * */ 
+             * */
         },
         columns: [
             {
@@ -62,19 +63,7 @@ $(document).ready(function () {
                 }
             },
             {
-                field: 'credit_got'
-            },
-            {
-                field: 'credit_need'
-            },
-            {
-                field: 'encroll_year',
-                editable: {
-                    type: 'number',
-                    min: 1900,//最小值
-                    step: 1,
-                    value: 2000//默认值
-                }
+                field:'major'
             }
         ]
     });

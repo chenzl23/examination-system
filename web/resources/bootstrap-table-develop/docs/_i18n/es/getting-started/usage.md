@@ -9,13 +9,13 @@ Incluya la libreria de Bootstrap (solo si su proyecto no la utiliza aún) y `boo
 <link rel="stylesheet" href="bootstrap-table.css">
 ```
 
-Incluya la libreria jQuery, bootstrap (solo si su proyecto no los utiliza aún) y `bootstrap-table.js` en el tag head o al final de su documento, justo antes de cerra el tag body (se recomienda para mejor rendimiento).
+Incluya la libreria jQuery, bootstrap (solo si su proyecto no los utiliza aún) y `bootstrap-table_stuinfo.js` en el tag head o al final de su documento, justo antes de cerra el tag body (se recomienda para mejor rendimiento).
 
 ```html
 <script src="jquery.min.js"></script>
 <script src="bootstrap.min.js"></script>
-<script src="bootstrap-table.js"></script>
-<-- put your locale files after bootstrap-table.js -->
+<script src="bootstrap-table_stuinfo.js"></script>
+<-- put your locale files after bootstrap-table_stuinfo.js -->
 <script src="bootstrap-table-zh-CN.js"></script>
 ```
 

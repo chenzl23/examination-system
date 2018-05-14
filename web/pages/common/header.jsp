@@ -6,7 +6,6 @@
             <p>当前用户：<%=session.getAttribute("username")%></p>
         </div>
 
-
         <ul>
             <li>
                 <button id="btnLogout">注销</button>

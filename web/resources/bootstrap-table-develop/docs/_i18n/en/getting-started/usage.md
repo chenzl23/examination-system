@@ -9,13 +9,13 @@ Include Bootstrap library (if your project doesn't use it already) and `bootstra
 <link rel="stylesheet" href="bootstrap-table.css">
 ```
 
-Include jQuery library, bootstrap library (if your project doesn't use it already) and `bootstrap-table.js` in the head tag or at the very bottom of your document, just before the closing body tag (usually recommended for better performance).
+Include jQuery library, bootstrap library (if your project doesn't use it already) and `bootstrap-table_stuinfo.js` in the head tag or at the very bottom of your document, just before the closing body tag (usually recommended for better performance).
 
 ```html
 <script src="jquery.min.js"></script>
 <script src="bootstrap.min.js"></script>
-<script src="bootstrap-table.js"></script>
-<-- put your locale files after bootstrap-table.js -->
+<script src="bootstrap-table_stuinfo.js"></script>
+<-- put your locale files after bootstrap-table_stuinfo.js -->
 <script src="bootstrap-table-zh-CN.js"></script>
 ```
 

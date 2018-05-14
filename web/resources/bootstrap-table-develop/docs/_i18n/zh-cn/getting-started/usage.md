@@ -9,13 +9,13 @@
 <link rel="stylesheet" href="bootstrap-table.css">
 ```
 
-引入 jQuery 库，bootstrap 库（假如你的项目还没有使用）和 `bootstrap-table.js` 到 head 标签下或者在 body 标签关闭之前（一般建议这么做）。
+引入 jQuery 库，bootstrap 库（假如你的项目还没有使用）和 `bootstrap-table_stuinfo.js` 到 head 标签下或者在 body 标签关闭之前（一般建议这么做）。
 
 ```html
 <script src="jquery.min.js"></script>
 <script src="bootstrap.min.js"></script>
-<script src="bootstrap-table.js"></script>
-<-- put your locale files after bootstrap-table.js -->
+<script src="bootstrap-table_stuinfo.js"></script>
+<-- put your locale files after bootstrap-table_stuinfo.js -->
 <script src="bootstrap-table-zh-CN.js"></script>
 ```
 

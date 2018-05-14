@@ -13,6 +13,7 @@ public class CourseStatusDao {
         CourseStaus courseStaus=null;
         String sql="select * from tb_course_status where id=?";
         PreparedStatement pstmt= connCst.prepareStatement(sql);
+        pstmt.setInt(1,cs_id);
         ResultSet rs=pstmt.executeQuery();
         while(rs.next()){
            courseStaus=new CourseStaus();

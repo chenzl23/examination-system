@@ -16,7 +16,7 @@ bootstrap-table/
     ├── extensions/
     ├── locale/
     ├── bootstrap-table.css
-    └── bootstrap-table.js
+    └── bootstrap-table_stuinfo.js
 ```
 
 `src/`，`locale/` 和 `extensions/` 是我们的 CSS，JavaScript 的源码。`dist/`文件夹包含了所有`src/`下压缩并扰乱的文件。`docs/`文件夹包含了我们文档的源码。另外，我们提供了包信息，License 信息，和其他的信息。

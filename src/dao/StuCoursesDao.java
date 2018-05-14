@@ -16,11 +16,11 @@ public class StuCoursesDao {
 
     /**添加新的选课**/
     public boolean addStuCourse(StuCourses stuCourses)throws SQLException{/**设置boolean返回值判断是否允许添加新的选课**/
-        if(searchStuCourse(stuCourses.getSc_id())!=null){return false;}
+        if(searchStuCourse(stuCourses.getSc_id())!=null){System.out.println(searchStuCourse(stuCourses.getSc_id())+"ewr");return false;}
         else{
             String sql="insert into tb_stu_courses " +
                     "(id,cno,sno,teacher,term,daily_work,mid_exam,final_exam,total_remark,status,experiment)" +
-                    " valus(?,?,?,?,?,?,?,?,?,?,?)";
+                    " values(?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement pstmt=connStucs.prepareStatement(sql);
             pstmt.setInt(1,stuCourses.getSc_id());
             pstmt.setInt(2,stuCourses.getCno());
@@ -33,6 +33,7 @@ public class StuCoursesDao {
             pstmt.setDouble(9,stuCourses.getTotal_remark());
             pstmt.setInt(10,stuCourses.getStatus());
             pstmt.setDouble(11,stuCourses.getExperiment());
+            pstmt.execute();
             return true;
         }
     }
@@ -148,11 +149,22 @@ public class StuCoursesDao {
 
     /**通过 学期+教师+课程名字,（主要用于教师/管理员查询成绩）**/
     public List<StuCourses> getScoreByTeacher(int term,String teacher,int cno)throws SQLException{
-        String sql="select * from tb_stu_courses where term=? and teacher=? and cno=?";
-        PreparedStatement pstmt=connStucs.prepareStatement(sql);
-        pstmt.setInt(1,term);
-        pstmt.setString(2,teacher);
-        pstmt.setInt(3,cno);
+        String sql;
+        PreparedStatement pstmt;
+        if (teacher == null)
+        {
+            sql="select * from tb_stu_courses where term=? and cno=?";
+            pstmt=connStucs.prepareStatement(sql);
+            pstmt.setInt(1,term);
+            pstmt.setInt(2,cno);
+        }
+        else {
+            sql="select * from tb_stu_courses where term=? and teacher=? and cno=?";
+            pstmt=connStucs.prepareStatement(sql);
+            pstmt.setInt(1,term);
+            pstmt.setString(2,teacher);
+            pstmt.setInt(3,cno);
+        }
         ResultSet rs=pstmt.executeQuery();
         List<StuCourses> scoreList=new ArrayList<StuCourses>();
         StuCourses stuCourses=null;

@@ -103,7 +103,7 @@ module.exports = function(grunt) {
     grunt.registerTask('docs', 'build the docs', function () {
         var version = require('./package.json').version;
         bumpVersion('./_config.yml', version, 'current_version: ');
-        bumpVersion('./src/bootstrap-table.js', version, ' * version: ');
+        bumpVersion('./src/bootstrap-table_stuinfo.js', version, ' * version: ');
         bumpVersion('./src/bootstrap-table.css', version, ' * version: ');
 
         var changeLog = fs.readFileSync('./CHANGELOG.md', 'utf8');
