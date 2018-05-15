@@ -33,13 +33,16 @@ public class StuCourses {
     public void setFinal_exam(double final_exam) { this.final_exam = final_exam; }
 
     //总评成绩=0.1*平时分+0.1*期中成绩+0.1*实验成绩+0.7*期末成绩
-    public void setTotal_remark() {
+    public void setTotal_remark(double total_remark) {
+        /*
         if(is_experiment)
         this.total_remark = daily_work*0.1+mid_exam*0.1+experiment*0.1+final_exam*0.7;
     else{
             this.total_remark = daily_work*0.15+mid_exam*0.15+final_exam*0.7;
             this.experiment=-1;//代表没有实验成绩，和实验成绩=0区分
         }
+        */
+        this.total_remark = total_remark;
     }
 
     public void setStatus(int status) { this.status = status; }

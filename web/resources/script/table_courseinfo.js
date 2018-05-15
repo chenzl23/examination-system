@@ -8,6 +8,9 @@ $(document).ready(function () {
         showColumns:true,
         searchAlign:'left',
         sortName:"id" ,
+        showExport:"true",
+        exportDataType:"all",
+        exportTypes:[ 'csv', 'txt', 'sql', 'doc', 'excel', 'xlsx'],  //导出文件类型
 
         onRefresh: function () {//刷新事件
             location.reload();

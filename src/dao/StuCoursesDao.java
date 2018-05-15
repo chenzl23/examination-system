@@ -43,7 +43,7 @@ public class StuCoursesDao {
     public boolean updateStuCourse(StuCourses stuCourses)throws SQLException{
         if(searchStuCourse(stuCourses.getSc_id())==null)return false;
         else{
-            String sql="update tb_stu_courses set cno=?,sno=?,teacher=?,term=?,daily_work=?,mid_exam=?,final_exam=?,total_remark=?,status=?,experiment=?" +
+            String sql="update tb_stu_courses set cno=?,sno=?,teacher=?,term=?,daily_work=?,mid_exam=?,final_exam=?,total_remark=?,status=?,experiment=? " +
                     "where id=?";
             PreparedStatement pstmt=connStucs.prepareStatement(sql);
             pstmt.setInt(1,stuCourses.getCno());
@@ -54,9 +54,17 @@ public class StuCoursesDao {
             pstmt.setDouble(6,stuCourses.getMid_exam());
             pstmt.setDouble(7,stuCourses.getFinal_exam());
             pstmt.setDouble(8,stuCourses.getTotal_remark());
-            pstmt.setInt(9,stuCourses.getStatus());
             pstmt.setDouble(10,stuCourses.getExperiment());
             pstmt.setInt(11,stuCourses.getSc_id());
+            //超过60分状态改为课程通过，否则未通过
+            if (stuCourses.getTotal_remark() >=60)
+            {
+                pstmt.setInt(9,3);
+            }
+            else
+            {
+                pstmt.setInt(9,4);
+            }
             pstmt.execute();
             return true;
         }
@@ -94,14 +102,7 @@ public class StuCoursesDao {
             stuCourses.setFinal_exam(rs.getDouble("final_exam"));
             stuCourses.setExperiment(rs.getDouble("experiment"));
             /**通过对实验成绩experiment的判断来设置返回的总评成绩和is_experiment**/
-            if(rs.getDouble("experiment")==-1){
-                stuCourses.setIs_experiment(false);
-                stuCourses.setTotal_remark();
-            }
-            else{
-                stuCourses.setIs_experiment(true);
-                stuCourses.setTotal_remark();
-            }
+            stuCourses.setTotal_remark(rs.getDouble("total_remark"));
             stuCourses.setStatus(rs.getInt("status"));
 
         }
@@ -132,15 +133,7 @@ public class StuCoursesDao {
             stuCourses.setFinal_exam(rs.getDouble("final_exam"));
             stuCourses.setExperiment(rs.getDouble("experiment"));
             /**通过对实验成绩experiment的判断来设置返回的总评成绩和is_experiment**/
-            if(rs.getDouble("experiment")!=-1){
-                stuCourses.setIs_experiment(true);
-                stuCourses.setTotal_remark();
-
-            }
-            else{
-                stuCourses.setIs_experiment(false);
-                stuCourses.setTotal_remark();
-            }
+            stuCourses.setTotal_remark(rs.getDouble("total_remark"));
             stuCourses.setStatus(rs.getInt("status"));
         }
     return stuCourses;
@@ -180,15 +173,7 @@ public class StuCoursesDao {
           stuCourses.setFinal_exam(rs.getDouble("final_exam"));
           stuCourses.setExperiment(rs.getDouble("experiment"));
             /**通过对实验成绩experiment的判断来设置返回的总评成绩和is_experiment**/
-            if(rs.getDouble("experiment")!=-1){
-                stuCourses.setIs_experiment(true);
-                stuCourses.setTotal_remark();
-
-            }
-            else {
-                stuCourses.setIs_experiment(false);
-                stuCourses.setTotal_remark();
-            }
+            stuCourses.setTotal_remark(rs.getDouble("total_remark"));
             stuCourses.setStatus(rs.getInt("status"));
             scoreList.add(stuCourses);
         }

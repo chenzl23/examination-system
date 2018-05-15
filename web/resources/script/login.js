@@ -69,16 +69,16 @@ function validateForm() {
         	success: function (data) {
 				if (data.state == "true")
 				{
-					if (data.role == "1") window.location.href="/super/index?key="+data.key;
-					else if (data.role == "2") window.location.href="/teacher/index?key="+data.key;
+					if (data.role == "1") window.location.href="/super/index?key="+data.key+"&grade=0&course=0";
+					else if (data.role == "2") window.location.href="/teacher/index?key="+data.key+"&grade=0&course=0";
 					else window.location.href="/teacher/student"+data.key;
 
 				}
 				else if (data.state == "valid")
 				{
 					alert("已有用户登录，现直接跳转");
-                    if (data.role == "1") window.location.href="/super/index?key="+data.key;
-                    else if (data.role == "2") window.location.href="/teacher/index?key="+data.key;
+                    if (data.role == "1") window.location.href="/super/index?key="+data.key+"&grade=0&course=0";
+                    else if (data.role == "2") window.location.href="/teacher/index?key="+data.key+"&grade=0&course=0";
                     else window.location.href="/teacher/student"+data.key;
 				}
 				else

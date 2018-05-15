@@ -8,6 +8,9 @@ $(document).ready(function () {
         showColumns:true,
         searchAlign:'left',
         sortName:"id" ,
+        showExport:"true",
+        exportDataType:"all",
+        exportTypes:[ 'csv', 'txt', 'sql', 'doc', 'excel', 'xlsx'],  //导出文件类型
 
         onRefresh: function () {//刷新事件
             location.reload();
@@ -21,7 +24,25 @@ $(document).ready(function () {
              * 
              * 
              * 这里写ajax方法保存输入框输入的值
-             * */ 
+             * */
+            $.ajax({
+                type: "post",
+                url: "/modify/stuinfo",
+                data: row,
+                dataType: 'JSON',
+                success: function (data, status) {
+                    if (status == "success") {
+                        alert('提交数据成功');
+                    }
+                },
+                error: function () {
+                    alert('编辑失败');
+                },
+                complete: function () {
+
+                }
+
+            });
         },
         columns: [
             {

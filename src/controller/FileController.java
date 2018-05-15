@@ -252,6 +252,8 @@ public class FileController {
             //该处可调用service相应方法进行数据保存到数据库中，现只对数据输出
             for (int i = 0; i < listob.size(); i++) {
                 List<Object> lo = listob.get(i);
+                if (lo.get(0).toString().length() == 0)
+                    break;
                 StuCourses course = new StuCourses();
                 CoursesService cs = new CoursesService();
                 course.setSc_id(Integer.valueOf(lo.get(0).toString().substring(0,10)));
@@ -276,6 +278,62 @@ public class FileController {
                 }
                 modelMap.put("nums",nums);
             }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            modelMap.put("state","UnknownError");
+            return modelMap;
+        }
+        modelMap.put("state","success");
+        return modelMap;
+    }
+
+    @RequestMapping(value="/stumark",method=RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Object> uploadSutMarkExcel(HttpServletRequest request, HttpServletResponse response) {
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+        try {
+            MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+            System.out.println("通过传统方式form表单提交方式导入excel文件！");
+            InputStream in = null;
+            List<List<Object>> listob = null;
+            MultipartFile file = multipartRequest.getFile("file");
+            if (file.isEmpty()) {
+                modelMap.put("state","FileNotFound");
+                return modelMap;
+            }
+            in = file.getInputStream();
+            listob = new ImportExcelUtil().getBankListByExcel(in, file.getOriginalFilename());
+            in.close();
+
+            StuCoursesDao dao = new StuCoursesDao();
+            int nums = 0;
+            //该处可调用service相应方法进行数据保存到数据库中，现只对数据输出
+            for (int i = 0; i < listob.size(); i++) {
+                List<Object> lo = listob.get(i);
+                if (lo.get(0).toString().length() == 0)
+                    break;
+                int scno = Integer.parseInt(lo.get(0).toString().substring(0,10));
+                StuCourses course = dao.searchStuCourse(scno);
+                course.setDaily_work(Double.parseDouble(lo.get(6).toString()));
+                course.setMid_exam(Double.parseDouble(lo.get(7).toString()));
+                course.setFinal_exam(Double.parseDouble(lo.get(8).toString()));
+                course.setExperiment(Double.parseDouble(lo.get(9).toString()));
+                course.setTotal_remark(Double.parseDouble(lo.get(10).toString()));
+                //存入数据库
+                try{
+                    dao.updateStuCourse(course);
+                    nums++;
+                }
+                catch (SQLException e)
+                {
+                    e.printStackTrace();
+                    modelMap.put("state","DataBaseError");
+                    return modelMap;
+                }
+            }
+            modelMap.put("nums",nums);
         }
         catch (Exception e)
         {

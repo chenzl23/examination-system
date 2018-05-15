@@ -17,6 +17,12 @@
   <script src="../../resources/script/bootstrap-table-zh-CN.js"></script>
   <script src="../../resources/script/bootstrap-editable.min.js"> </script>
   <script src="../../resources/script/bootstrap-table-editable.js"> </script>
+    <script src="../../resources/script/tableExport.jquery.plugin-master/tableExport.js"> </script>
+    <script src="../../resources/script/tableExport.jquery.plugin-master/tableExport.min.js"> </script>
+    <script src="../../resources/script/tableExport.jquery.plugin-master/libs/js-xlsx/xlsx.core.min.js"> </script>
+    <script src="../../resources/script/tableExport.jquery.plugin-master/libs/jsPDF/jspdf.min.js"> </script>
+    <script src="../../resources/script/tableExport.jquery.plugin-master/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js"> </script>
+    <script src="../../resources/script/bootstrap-table-export.js"> </script>
   <script src="../../resources/script/teacher.js"></script>
   <script src="../../resources/script/${table_js}"></script>
 
@@ -32,14 +38,22 @@
   <div id="content">
         <div id="selectCourse" class="middle">
           <span class="font">年级：</span>
-          <select class="select">
-              <option>2015</option>
-              <option>2016</option>
+          <select id="grade" class="select">
+              <option value="2015">2015</option>
+              <option value="2016">2016</option>
           </select>
           <span class="font">课程：</span>
-          <select class="select">
-              <option>Java</option>
-              <option>C#</option>
+          <select id="course" class="select">
+              <c:forEach items="${courselist}" var="course">
+                  <c:choose>
+                      <c:when test="${param.course == course.cno}">
+                          <option value="${course.cno}" selected>${course.c_name}</option>
+                      </c:when>
+                      <c:otherwise>
+                          <option value="${course.cno}">${course.c_name}</option>
+                      </c:otherwise>
+                  </c:choose>
+              </c:forEach>
           </select>
           <input id="btnConfirm" type="button" class="button" value="确定" >
         </div><!-- /search -->
@@ -74,6 +88,14 @@
     </div><!-- /footer -->
 
   </div><!-- /container -->
+<script>
+    $("#btnConfirm").click(function () {
+        course = $("#course option:selected").val();
+        grade = $("#grade option:selected").val();
+        window.location.href="/teacher/${page}?key=<%=session.getAttribute("key")%>&grade="+grade+"&course="+course;
+        }
+    )
+</script>
 </body>
 
 </html>

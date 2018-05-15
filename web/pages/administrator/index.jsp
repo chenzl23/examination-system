@@ -17,6 +17,12 @@
   <script src="../../resources/script/bootstrap-table-zh-CN.js"></script>
   <script src="../../resources/script/bootstrap-editable.min.js"> </script>
   <script src="../../resources/script/bootstrap-table-editable.js"> </script>
+    <script src="../../resources/script/tableExport.jquery.plugin-master/tableExport.js"> </script>
+    <script src="../../resources/script/tableExport.jquery.plugin-master/tableExport.min.js"> </script>
+    <script src="../../resources/script/tableExport.jquery.plugin-master/libs/js-xlsx/xlsx.core.min.js"> </script>
+    <script src="../../resources/script/tableExport.jquery.plugin-master/libs/jsPDF/jspdf.min.js"> </script>
+    <script src="../../resources/script/tableExport.jquery.plugin-master/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js"> </script>
+    <script src="../../resources/script/bootstrap-table-export.js"> </script>
   <script src="../../resources/script/teacher.js"></script>
   <script src="../../resources/script/${table_js}"></script>
 
@@ -31,17 +37,53 @@
 
   <div id="content">
         <div id="selectCourse" class="middle">
+        <c:if test="${grade == 1}">
           <span class="font">年级：</span>
-          <select class="select">
-              <option>2015</option>
-              <option>2016</option>
-          </select>
-          <span class="font">课程：</span>
-          <select class="select">
-              <option>Java</option>
-              <option>C#</option>
-          </select>
-          <input id="btnConfirm" type="button" class="button" value="确定" >
+            <select id="grade" class="select">
+                <c:choose>
+                    <c:when test="${param.grade == 2015}">
+                        <option value="2015" selected>2015</option>
+                    </c:when>
+                    <c:otherwise>
+                        <option value="2015">2015</option>
+                    </c:otherwise>
+                </c:choose>
+                <c:choose>
+                    <c:when test="${param.grade == 2016}">
+                        <option value="2016" selected>2016</option>
+                    </c:when>
+                    <c:otherwise>
+                        <option value="2016">2016</option>
+                    </c:otherwise>
+                </c:choose>
+                <c:choose>
+                    <c:when test="${param.grade == 2017}">
+                        <option value="2017" selected>2017</option>
+                    </c:when>
+                    <c:otherwise>
+                        <option value="2017">2017</option>
+                    </c:otherwise>
+                </c:choose>
+            </select>
+        </c:if>
+            <c:if test="${course == 1}">
+            <span class="font">课程：</span>
+            <select id="course" class="select">
+                <c:forEach items="${courselist}" var="course">
+                    <c:choose>
+                        <c:when test="${param.course == course.cno}">
+                            <option value="${course.cno}" selected>${course.c_name}</option>
+                        </c:when>
+                        <c:otherwise>
+                            <option value="${course.cno}">${course.c_name}</option>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+            </select>
+            </c:if>
+            <c:if test="${!(grade==0 && course==0)}">
+                <input id="btnConfirm" type="button" class="button" value="确定" >
+            </c:if>
         </div><!-- /search -->
 
         <div id="stuInfo" class="middle">
@@ -74,6 +116,21 @@
     </div><!-- /footer -->
 
   </div><!-- /container -->
+<script>
+    $("#btnConfirm").click(function () {
+            course = $("#course option:selected").val();
+            grade = $("#grade option:selected").val();
+            if (course == null)
+                window.location.href="/super/${page}?key=<%=session.getAttribute("key")%>&grade="+grade+"&course="+0;
+            else if (grade == null)
+                window.location.href="/super/${page}?key=<%=session.getAttribute("key")%>&grade="+0+"&course="+course;
+            else if (grade == null && course == null)
+                window.location.href="/super/${page}?key=<%=session.getAttribute("key")%>&grade="+0+"&course="+0;
+            else
+                window.location.href="/super/${page}?key=<%=session.getAttribute("key")%>&grade="+grade+"&course="+course;
+        }
+    )
+</script>
 </body>
 
 </html>

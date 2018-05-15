@@ -13,10 +13,10 @@
             <ul class="second_menu">
                 <c:choose>
                     <c:when test="${page.equals('index')}">
-                        <li id="chosenPage"><a href="/${base_url}/index?key=<%=session.getAttribute("key") %>">查看学生信息</a></li>
+                        <li id="chosenPage"><a href="/${base_url}/index?key=<%=session.getAttribute("key") %>&grade=0&course=0">查看学生信息</a></li>
                     </c:when>
                     <c:otherwise>
-                        <li><a href="/${base_url}/index?key=<%=session.getAttribute("key") %>">查看学生信息</a></li>
+                        <li><a href="/${base_url}/index?key=<%=session.getAttribute("key") %>&grade=0&course=0">查看学生信息</a></li>
                     </c:otherwise>
                 </c:choose>
                 <c:choose>
@@ -35,10 +35,10 @@
             <ul class="second_menu">
                 <c:choose>
                     <c:when test="${page.equals('getStudentMark')}">
-                        <li id="chosenPage"><a href="/${base_url}/getStudentMark?key=<%=session.getAttribute("key") %>">查看学生成绩</a></li>
+                        <li id="chosenPage"><a href="/${base_url}/getStudentMark?key=<%=session.getAttribute("key") %>&grade=0&course=0">查看学生成绩</a></li>
                     </c:when>
                     <c:otherwise>
-                        <li><a href="/${base_url}/getStudentMark?key=<%=session.getAttribute("key") %>">查看学生成绩</a></li>
+                        <li><a href="/${base_url}/getStudentMark?key=<%=session.getAttribute("key") %>&grade=0&course=0">查看学生成绩</a></li>
                     </c:otherwise>
                 </c:choose>
 

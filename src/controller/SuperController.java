@@ -1,6 +1,7 @@
 package controller;
 
 
+import bean.CourseList;
 import dao.*;
 import model.*;
 import org.springframework.stereotype.Controller;
@@ -44,7 +45,8 @@ public class SuperController {
     }
 
     @RequestMapping(value = "/index",method = RequestMethod.GET)
-    public String index(@RequestParam("key") String key,Model model, HttpSession session)
+    public String index(@RequestParam("key") String key,@RequestParam(value = "grade",required = false)
+            int grade ,@RequestParam(value = "course",required = false) int course,Model model, HttpSession session)
     {
         //判断登录权限
         if (!isLogin(session,key))
@@ -58,9 +60,23 @@ public class SuperController {
         List<Stuinfo> stu;
         StuinfoDao dao = new StuinfoDao();
         try {
+            //获取课程列表
+            List<CourseList> returnCourseList = new ArrayList();
+            CoursesDao cd = new CoursesDao();
+            List<Courses> courseList = cd.searchAllCourse();
+            for (Courses item:courseList)
+            {
+                CourseList cl = new CourseList();
+                cl.setCno(item.getC_id());
+                cl.setC_name(item.getC_name());
+                returnCourseList.add(cl);
+            }
+            model.addAttribute("courselist",returnCourseList);
             stu = dao.searchAllStuinfo();
             for(Stuinfo data:stu)
             {
+                if (data.getEnrollyear() != grade && grade!=0)
+                    continue;
                 List line = new ArrayList<>();
                 line.add(data.getId());
                 line.add(data.getName());
@@ -87,6 +103,8 @@ public class SuperController {
         title.add("需获学分");
         title.add("入学年份");
         title.add("专业");
+        model.addAttribute("grade",1);
+        model.addAttribute("course",0);
         model.addAttribute("table_js","table_stuinfo.js");
         model.addAttribute("title",title);
         model.addAttribute("page","index");
@@ -112,7 +130,8 @@ public class SuperController {
     }
 
     @RequestMapping(value = "/getTeacher",method = RequestMethod.GET)
-    public String getTeacher(@RequestParam("key") String key,Model model,HttpSession session)
+    public String getTeacher(@RequestParam("key") String key,@RequestParam(value = "grade",required = false)
+            int grade ,@RequestParam(value = "course",required = false) int course,Model model,HttpSession session)
     {
         //判断登录权限
         if (!isLogin(session,key))
@@ -125,6 +144,19 @@ public class SuperController {
         List<Teachinfo> tea;
         TeachinfoDao dao = new TeachinfoDao();
         try {
+            //获取课程列表
+            System.out.println(grade+" "+session.getAttribute("username").toString() + " "+course);
+            List<CourseList> returnCourseList = new ArrayList();
+            CoursesDao cd = new CoursesDao();
+            List<Courses> courseList = cd.searchAllCourse();
+            for (Courses item:courseList)
+            {
+                CourseList cl = new CourseList();
+                cl.setCno(item.getC_id());
+                cl.setC_name(item.getC_name());
+                returnCourseList.add(cl);
+            }
+            model.addAttribute("courselist",returnCourseList);
             tea = dao.searchAllTeachinfo();
             for(Teachinfo data:tea)
             {
@@ -150,6 +182,8 @@ public class SuperController {
         title.add("电话");
         title.add("邮箱");
         title.add("专业");
+        model.addAttribute("grade",0);
+        model.addAttribute("course",0);
         model.addAttribute("table_js","table_teainfo.js");
         model.addAttribute("title",title);
         model.addAttribute("page","getTeacher");
@@ -174,7 +208,8 @@ public class SuperController {
     }
 
     @RequestMapping(value = "/getCourseInfo",method = RequestMethod.GET)
-    public String getCourseInfo(@RequestParam("key") String key,Model model,HttpSession session)
+    public String getCourseInfo(@RequestParam("key") String key,@RequestParam(value = "grade",required = false)
+            int grade ,@RequestParam(value = "course",required = false) int course,Model model,HttpSession session)
     {
         //判断登录权限
         if (!isLogin(session,key))
@@ -184,11 +219,24 @@ public class SuperController {
         }
 
         List courselist = new ArrayList();
-        List<Courses> course;
+        List<Courses> courses;
         CoursesDao dao = new CoursesDao();
         try {
-            course = dao.searchAllCourse();
-            for(Courses data:course)
+            //获取课程列表
+            System.out.println(grade+" "+session.getAttribute("username").toString() + " "+course);
+            List<CourseList> returnCourseList = new ArrayList();
+            CoursesDao cd = new CoursesDao();
+            List<Courses> courseList = cd.searchAllCourse();
+            for (Courses item:courseList)
+            {
+                CourseList cl = new CourseList();
+                cl.setCno(item.getC_id());
+                cl.setC_name(item.getC_name());
+                returnCourseList.add(cl);
+            }
+            model.addAttribute("courselist",returnCourseList);
+            courses = dao.searchAllCourse();
+            for(Courses data:courses)
             {
                 List line = new ArrayList<>();
                 line.add(data.getC_id());
@@ -207,6 +255,8 @@ public class SuperController {
         title.add("课程名");
         title.add("开设年级");
         title.add("学分");
+        model.addAttribute("grade",1);
+        model.addAttribute("course",1);
         model.addAttribute("table_js","table_courseinfo.js");
         model.addAttribute("title",title);
         model.addAttribute("page","getCourseInfo");
@@ -231,7 +281,8 @@ public class SuperController {
     }
 
     @RequestMapping(value = "/getCourseChosen",method = RequestMethod.GET)
-    public String getCourseChosen(@RequestParam("key") String key,Model model,HttpSession session)
+    public String getCourseChosen(@RequestParam("key") String key,@RequestParam(value = "grade",required = false)
+            int grade ,@RequestParam(value = "course",required = false) int course,Model model,HttpSession session)
     {
         //判断登录权限
         if (!isLogin(session,key))
@@ -241,16 +292,36 @@ public class SuperController {
         }
 
         List courselist = new ArrayList();
-        List<StuCourses> course;
+        List<StuCourses> courses;
         StuCoursesDao dao = new StuCoursesDao();
         try {
-            course = dao.getScoreByTeacher(2015,null,2);
-            System.out.println(course.size());
-            for(StuCourses data:course)
+            //获取课程列表
+            System.out.println(grade+" "+session.getAttribute("username").toString() + " "+course);
+            List<CourseList> returnCourseList = new ArrayList();
+            CoursesDao cd = new CoursesDao();
+            List<Courses> courseList = cd.searchAllCourse();
+            for (Courses item:courseList)
+            {
+                CourseList cl = new CourseList();
+                cl.setCno(item.getC_id());
+                cl.setC_name(item.getC_name());
+                returnCourseList.add(cl);
+            }
+            model.addAttribute("courselist",returnCourseList);
+            //获得成绩信息
+            if (grade != 0  && course!=0)
+            {
+                courses = dao.getScoreByTeacher(grade,null,course);
+            }
+            else {
+                int findCourse = courseList.get(0).getC_id();
+                courses = dao.getScoreByTeacher(2015,null,findCourse);
+                System.out.println(findCourse);
+            }
+            for(StuCourses data:courses)
             {
                 List line = new ArrayList<>();
                 line.add(data.getSc_id());
-                CoursesDao cd = new CoursesDao();
                 line.add(cd.searchSingleCourse(data.getCno()).getC_name());
                 line.add(data.getSno());
                 StuinfoDao sd = new StuinfoDao();
@@ -261,7 +332,6 @@ public class SuperController {
                 line.add(csd.searchCourseStatus(data.getStatus()).getCs_name());
                 courselist.add(line);
             }
-            System.out.println(courselist);
             model.addAttribute("list",courselist);
         } catch (Exception e) {
             e.printStackTrace();
@@ -275,6 +345,8 @@ public class SuperController {
         title.add("开设年级");
         title.add("教师");
         title.add("选课状态");
+        model.addAttribute("grade",1);
+        model.addAttribute("course",1);
         model.addAttribute("table_js","table_getCourseChosen.js");
         model.addAttribute("title",title);
         model.addAttribute("page","getCourseChosen");
@@ -296,5 +368,90 @@ public class SuperController {
         model.addAttribute("sub_url","coursechosen");
         model.addAttribute("title","选课信息");
         return "/administrator/importStudentInfo";
+    }
+
+    //查询学生成绩
+    @RequestMapping(value = "/getStudentMark",method = RequestMethod.GET)
+    public String getStudentMark(@RequestParam("key") String key,@RequestParam(value = "grade",required = false)
+            int grade ,@RequestParam(value = "course",required = false) int course,Model model, HttpSession session)
+    {
+        //判断登录权限
+        if (!isLogin(session,key))
+        {
+            model.addAttribute("message","登录时间过期,请重新登录");
+            return "/common/error";
+        }
+
+        List courselist = new ArrayList();
+        List<StuCourses> courses;
+        StuCoursesDao dao = new StuCoursesDao();
+        try {
+            //获取课程列表与教师列表
+            List<CourseList> returnCourseList = new ArrayList();
+            CoursesDao cd = new CoursesDao();
+            List<Courses> courseList = cd.searchAllCourse();
+            for (Courses item:courseList)
+            {
+                CourseList cl = new CourseList();
+                cl.setCno(item.getC_id());
+                cl.setC_name(item.getC_name());
+                returnCourseList.add(cl);
+            }
+            model.addAttribute("courselist",returnCourseList);
+            //获得成绩信息
+            if (grade != 0  && course!=0)
+            {
+                courses = dao.getScoreByTeacher(grade,null,course);
+            }
+            else {
+                int findCourse = courseList.get(0).getC_id();
+                courses = dao.getScoreByTeacher(2015,null,findCourse);
+                System.out.println(findCourse);
+            }
+            for(StuCourses data:courses)
+            {
+                List line = new ArrayList<>();
+                line.add(data.getSc_id());
+                line.add(cd.searchSingleCourse(data.getCno()).getC_name());
+                line.add(data.getSno());
+                StuinfoDao sd = new StuinfoDao();
+                line.add(sd.searchSingleStuinfo(data.getSno()).getName());
+                line.add(data.getTerm());
+                line.add(data.getTeacher());
+                line.add(data.getDaily_work());
+                line.add(data.getMid_exam());
+                line.add(data.getFinal_exam());
+                line.add(data.getExperiment());
+                line.add(data.getTotal_remark());
+                CourseStatusDao csd = new CourseStatusDao();
+                line.add(csd.searchCourseStatus(data.getStatus()).getCs_name());
+                courselist.add(line);
+            }
+            model.addAttribute("list",courselist);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        List<String> title = new ArrayList<>();
+        title.add("选课编码");
+        title.add("课程名");
+        title.add("学号");
+        title.add("学生");
+        title.add("开设年级");
+        title.add("教师");
+        title.add("平时成绩");
+        title.add("期中成绩");
+        title.add("期末成绩");
+        title.add("实验成绩");
+        title.add("总评成绩");
+        title.add("选课状态");
+
+        model.addAttribute("grade",1);
+        model.addAttribute("course",1);
+        model.addAttribute("table_js","table_mark.js");
+        model.addAttribute("title",title);
+        model.addAttribute("page","getStudentMark");
+        model.addAttribute("base_url","super");
+        return "/administrator/index";
     }
 }

@@ -42,7 +42,7 @@ public class StuinfoDao {
     public boolean updateStuinfo(Stuinfo s)throws SQLException{
         if(searchSingleStuinfo(s.getId())==null) return false;
         else {
-            String sql = "update tb_stuinfo set name=?,birth=?,photo=?,tel=?,email=?,major=?,enrollyear=?,credit_got=?,credit_need=? where id=?";
+            String sql = "update tb_stuinfo set name=?,birth=?,photo=?,tel=?,email=?,major=?,enroll_year=?,credit_got=?,credit_need=? where id=?";
             PreparedStatement pstmt = connStu.prepareStatement(sql);
             pstmt.setString(1, s.getName());
             pstmt.setDate(2, s.getBirth());
