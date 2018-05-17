@@ -111,16 +111,14 @@ public class StuCoursesDao {
     /**通过选课sc_id查找选课信息**/
 
     /**通过 学号+学期+课程名字查询选课信息（主要是学生查询成绩）**/
-    public StuCourses searchStuScore(String sno,int term,String c_name)throws SQLException{
+    public List<StuCourses> searchStuScore(String sno)throws SQLException{
         CoursesService css=new CoursesService();
         StuCourses stuCourses=null;
-        String sql="select * from tb_stu_courses where sno=?and term=?,and cno=?";
-        int cno=css.searchCourseByNameService(c_name).getC_id();
+        String sql="select * from tb_stu_courses where sno=?";
         PreparedStatement pstmt=connStucs.prepareStatement(sql);
         pstmt.setString(1,sno);
-        pstmt.setInt(2,term);
-        pstmt.setInt(3,cno);
         ResultSet rs=pstmt.executeQuery();
+        List<StuCourses> scoreList=new ArrayList<StuCourses>();
         while(rs.next()){
             stuCourses=new StuCourses();
             stuCourses.setCno(rs.getInt("cno"));
@@ -135,8 +133,9 @@ public class StuCoursesDao {
             /**通过对实验成绩experiment的判断来设置返回的总评成绩和is_experiment**/
             stuCourses.setTotal_remark(rs.getDouble("total_remark"));
             stuCourses.setStatus(rs.getInt("status"));
+            scoreList.add(stuCourses);
         }
-    return stuCourses;
+    return scoreList;
 }
     /**通过 学号+学期+课程名字查询选课信息,（主要用于学生查询成绩）**/
 

@@ -29,7 +29,7 @@ public class TeachinfoDao {
     public boolean updateTeachinfo(Teachinfo t)throws SQLException{
         if(searchSingleTeachinfo(t.getT_id())==null) return false;
         else {
-            String sql = "update tb_teachinfo name=?,birth=?,photo=?,tel=?,email=?,major=? where id=?";
+            String sql = "update tb_teachinfo set name=?,birth=?,photo=?,tel=?,email=?,major=? where id=?";
             PreparedStatement pstmt = connTeach.prepareStatement(sql);
             pstmt.setString(1, t.getT_name());
             pstmt.setDate(2, t.getT_birth());

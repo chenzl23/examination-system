@@ -11,7 +11,6 @@ $(document).ready(function () {
         showExport:"true",
         exportDataType:"all",
         exportTypes:[ 'csv', 'txt', 'sql', 'doc', 'excel', 'xlsx'],  //导出文件类型
-
         onRefresh: function () {//刷新事件
             location.reload();
         },
@@ -21,22 +20,22 @@ $(document).ready(function () {
              * field：刚刚修改的列的Id，就是下面columns数组里的field
              * row：修改项所在行
              * 具体的值就是像  row.id   row.name  row.birth ... 这样子的
-             *
-             *
+             * 
+             * 
              * 这里写ajax方法保存输入框输入的值
              * */
             $.ajax({
                 type: "post",
-                url: "/modify/teainfo",
+                url: "/modify/mark",
                 data: row,
                 dataType: 'JSON',
                 success: function (data, status) {
-                    if (data.status == "success") {
+                    if (status == "success") {
                         alert('提交数据成功');
                     }
                 },
                 error: function () {
-                    alert('编辑失败\n'+date.message);
+                    alert('编辑失败');
                 },
                 complete: function () {
 
@@ -46,45 +45,52 @@ $(document).ready(function () {
         },
         columns: [
             {
-                field: 'id',
+                field: 'course_num',
+                title:'选课编码'
             },
             {
-                field: 'name',
-                editable: {//启用输入框
-                    type: 'text',//input输入框类别
-                    validate: function (v) {
-                        if (v == '')
-                            return '输入不能为空';
-                    }
-                }
+                field: 'course_name',
+                title:'课程名'
             },
             {
-                field: 'birth'
+                field: 's_no',
+                title:'选课编码'
             },
             {
-                field: 'tel',
-                editable: {
-                    type: 'text',
-                    title: '电话',
-                    validate: function (v) {
-                        if (isNaN(v))//这个只是判断是不是数字，验证你可以自己写
-                            return '输入的电话号码不合法';
-                    }
-                }
+                field: 's_name',
+                title:'学号'
             },
             {
-                field: 'email',
-                editable: {
-                    type: 'email',//这个不确定能不能用，不可的话就改成text，然后自己加验证方法
-                    title: '邮箱'
-                }
+                field: 'term',
+                title:'开设年级'
             },
             {
-                field:'major',
-                editable: {
-                    type: 'text',//这个不确定能不能用，不可的话就改成text，然后自己加验证方法
-                    title: '专业'
-                }
+                field: 'teacher',
+                title:'教师'
+            },
+            {
+                field: 'daily_work',
+                title:'平时成绩'
+            },
+            {
+                field: 'mid_exam',
+                title:'期中成绩'
+            },
+            {
+                field: 'final_exam',
+                title:'期末成绩'
+            },
+            {
+                field: 'experiment',
+                title:'实验成绩'
+            },
+            {
+                field: 'total_remark',
+                title:'总评成绩'
+            },
+            {
+                field: 'status',
+                title:'选课状态'
             }
         ]
     });

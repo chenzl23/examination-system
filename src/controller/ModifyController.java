@@ -1,10 +1,14 @@
 package controller;
 
 
+import dao.MajorDao;
 import dao.StuCoursesDao;
 import dao.StuinfoDao;
+import dao.TeachinfoDao;
+import model.Major;
 import model.StuCourses;
 import model.Stuinfo;
+import model.Teachinfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -68,6 +72,40 @@ public class ModifyController {
             stu.setExperiment(Double.parseDouble(request.getParameter("experiment").toString()));
             stu.setTotal_remark(Double.parseDouble(request.getParameter("total_remark").toString()));
             dao.updateStuCourse(stu);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            hashmap.put("status","error");
+            return hashmap;
+        }
+        hashmap.put("status","success");
+        return hashmap;
+    }
+
+    @RequestMapping(value="/teainfo",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> modifyTeacherInfo(HttpServletRequest request, Model model, HttpSession session){
+        Map<String, Object> hashmap = new HashMap<String,Object>();
+        TeachinfoDao dao = new TeachinfoDao();
+        try {
+            Teachinfo tea = dao.searchSingleTeachinfo(request.getParameter("id").toString());
+            if (tea == null)
+            {
+                hashmap.put("status","error");
+                return hashmap;
+            }
+           tea.setT_name(request.getParameter("name"));
+           tea.setT_email(request.getParameter("email"));
+           tea.setT_tel(request.getParameter("tel"));
+           MajorDao  md = new MajorDao();
+           Major major = md.searchMajorId(request.getParameter("major").toString());
+           if (major == null)
+           {
+               hashmap.put("status","error");
+               hashmap.put("message","Major error");
+               return hashmap;
+           }
+           tea.setT_major(major.getM_id());
+           dao.updateTeachinfo(tea);
         } catch (SQLException e) {
             e.printStackTrace();
             hashmap.put("status","error");

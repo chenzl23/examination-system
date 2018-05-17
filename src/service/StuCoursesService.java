@@ -28,8 +28,8 @@ public class StuCoursesService {
     }
     /**通过 学号+学期+课程名字查询选课信息（主要是学生查询成绩）,返回StuCourses类，
      * 需要使用时直接searchStuScoreService(sno,term,c_name).get方法 获得成绩**/
-    public StuCourses searchStuScoreService(String sno,int term,String c_name)throws SQLException{
-        return stuCoursesDao.searchStuScore(sno,term,c_name);
+    public List<StuCourses> searchStuScoreService(String sno,int term,String c_name)throws SQLException{
+        return stuCoursesDao.searchStuScore(sno);
     }
     /**通过 学期+教师名字+课程名字,（主要用于教师/管理员查询成绩）**/
     public List<StuCourses> getScoreByTeacherService(int term,String teacher,String c_name)throws SQLException{

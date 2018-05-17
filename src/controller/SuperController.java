@@ -44,6 +44,66 @@ public class SuperController {
         return false;
     }
 
+    @RequestMapping(value = "markList",method = RequestMethod.GET)
+    public String markList (@RequestParam(value = "id",required = true) String id,@RequestParam("key") String key,Model model, HttpSession session)
+    {
+        //判断登录权限
+        if (!isLogin(session,key))
+        {
+            model.addAttribute("message","登录时间过期,请重新登录");
+            return "/common/error";
+        }
+        List courselist = new ArrayList();
+        List<StuCourses> courses;
+        StuCoursesDao dao = new StuCoursesDao();
+        try {
+            courses = dao.searchStuScore(id.toString());
+            CoursesDao cd = new CoursesDao();
+            for(StuCourses data:courses)
+            {
+                List line = new ArrayList<>();
+                line.add(data.getSc_id());
+                line.add(cd.searchSingleCourse(data.getCno()).getC_name());
+                line.add(data.getSno());
+                StuinfoDao sd = new StuinfoDao();
+                line.add(sd.searchSingleStuinfo(data.getSno()).getName());
+                line.add(data.getTerm());
+                line.add(data.getTeacher());
+                line.add(data.getDaily_work());
+                line.add(data.getMid_exam());
+                line.add(data.getFinal_exam());
+                line.add(data.getExperiment());
+                line.add(data.getTotal_remark());
+                CourseStatusDao csd = new CourseStatusDao();
+                line.add(csd.searchCourseStatus(data.getStatus()).getCs_name());
+                courselist.add(line);
+            }
+            model.addAttribute("list",courselist);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        List<String> title = new ArrayList<>();
+        title.add("选课编码");
+        title.add("课程名");
+        title.add("学号");
+        title.add("学生");
+        title.add("开设年级");
+        title.add("教师");
+        title.add("平时成绩");
+        title.add("期中成绩");
+        title.add("期末成绩");
+        title.add("实验成绩");
+        title.add("总评成绩");
+        title.add("选课状态");
+
+        model.addAttribute("table_js","table_mark.js");
+        model.addAttribute("title",title);
+        model.addAttribute("page","markList");
+        model.addAttribute("base_url","super");
+        return "/administrator/stu_mark";
+    }
+
     @RequestMapping(value = "/index",method = RequestMethod.GET)
     public String index(@RequestParam("key") String key,@RequestParam(value = "grade",required = false)
             int grade ,@RequestParam(value = "course",required = false) int course,Model model, HttpSession session)
@@ -87,6 +147,7 @@ public class SuperController {
                 line.add(data.getCredit_need());
                 line.add(data.getEnrollyear());
                 line.add(data.getMajor());
+                line.add("<a href=\"http://localhost/super/markList?key="+key+"&id="+data.getId()+"\">查看成绩单</a>");
                 stulist.add(line);
             }
             model.addAttribute("list",stulist);
@@ -103,6 +164,7 @@ public class SuperController {
         title.add("需获学分");
         title.add("入学年份");
         title.add("专业");
+        title.add("操作");
         model.addAttribute("grade",1);
         model.addAttribute("course",0);
         model.addAttribute("table_js","table_stuinfo.js");
