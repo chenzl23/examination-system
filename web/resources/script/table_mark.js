@@ -58,7 +58,7 @@ $(document).ready(function () {
             },
             {
                 field: 's_name',
-                title:'学号'
+                title:'姓名'
             },
             {
                 field: 'term',

@@ -4,8 +4,7 @@ import model.StuCourses;
 import service.CoursesService;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author by Lxp
@@ -110,6 +109,7 @@ public class StuCoursesDao {
     }
     /**通过选课sc_id查找选课信息**/
 
+
     /**通过 学号+学期+课程名字查询选课信息（主要是学生查询成绩）**/
     public List<StuCourses> searchStuScore(String sno)throws SQLException{
         CoursesService css=new CoursesService();
@@ -138,6 +138,23 @@ public class StuCoursesDao {
     return scoreList;
 }
     /**通过 学号+学期+课程名字查询选课信息,（主要用于学生查询成绩）**/
+
+    /**通过学期和课程号获得教师信息**/
+    public Set<String> searchTeacher(int term,int cno)throws SQLException{
+        String sql;
+        PreparedStatement pstmt;
+        sql="select teacher from tb_stu_courses where term=? and cno=?";
+        pstmt=connStucs.prepareStatement(sql);
+        pstmt.setInt(1,term);
+        pstmt.setInt(2,cno);
+        ResultSet rs=pstmt.executeQuery();
+        Set<String> hs = new HashSet();
+        while (rs.next())
+        {
+            hs.add(rs.getString("teacher"));
+        }
+        return hs;
+    }
 
     /**通过 学期+教师+课程名字,（主要用于教师/管理员查询成绩）**/
     public List<StuCourses> getScoreByTeacher(int term,String teacher,int cno)throws SQLException{
