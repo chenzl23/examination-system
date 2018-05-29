@@ -36,7 +36,7 @@
 <div id="wrapper">
   <%@ include file="/pages/common/header.jsp" %>
 
-      <span class="font">教师：</span>
+      <span class="font">课程：</span>
       <select id="teacher" class="select">
           <c:forEach items="${tealist}" var="item">
               <c:choose>
@@ -325,7 +325,7 @@
 
           $("#selectTeacher").click(function () {
                  tea = $("#teacher option:selected").val();
-                  window.location.href="/super/analysis?key=<%=session.getAttribute("key")%>&grade=${param.grade}&course=${param.course}&teacher="+tea;
+                  window.location.href="/teacher/analysis?key=<%=session.getAttribute("key")%>&grade=${param.grade}&course=${param.course}&teacher="+tea;
               }
           )
       </script>

@@ -3,18 +3,21 @@ package controller;
 
 import bean.CourseList;
 import dao.*;
+import helper.TimeHelper;
 import model.Log;
+import model.Messages;
 import model.StuCourses;
+import model.Teachinfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping("/student")
@@ -104,4 +107,56 @@ public class StudentController {
         model.addAttribute("base_url","student");
         return "/student/index";
     }
-}
+
+    @RequestMapping(value = "/reply",method = RequestMethod.GET)
+    public String reply(@RequestParam("key") String key,Model model, HttpSession session) {
+
+        //加载教师列表
+        TeachinfoDao dao = new TeachinfoDao();
+        List<Teachinfo> teacherlist = null;
+        try {
+            teacherlist = dao.searchAllTeachinfo();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        model.addAttribute("tealist",teacherlist);
+
+        model.addAttribute("page","reply");
+        model.addAttribute("base_url","student");
+        return "/student/reply";
+    }
+
+    @RequestMapping(value = "/sendmessage",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> sendmessage(@RequestParam("key") String key, @RequestParam("to") String to,
+                                           @RequestParam("message") String message, Model model, HttpSession session) {
+        System.out.println("添加反馈");
+        Map<String, Object> hashmap = new HashMap<String,Object>();
+        MessagesDao dao = new MessagesDao();
+        TeachinfoDao td = new TeachinfoDao();
+        Messages mes = new Messages();
+        try {
+            Teachinfo tea = td.searchTeachinfoByName(to);
+
+            mes.setFrom_id((String) session.getAttribute("username"));
+            mes.setTo_id(tea.getT_id());
+            mes.setMessage(message);
+            dao.addMessages(mes);
+            hashmap.put("state","true");
+            return hashmap;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            hashmap.put("error_message",e.getMessage());
+            hashmap.put("state","false");
+            return hashmap;
+        }
+
+
+    }
+
+
+
+
+
+    }

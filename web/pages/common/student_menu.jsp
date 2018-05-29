@@ -9,7 +9,7 @@
 <div id="menu">
     <ul class="first_menu">
         <li>
-            <a href="#">成绩管理</a>
+            <a href="#">学生操作</a>
             <ul class="second_menu">
                 <c:choose>
                     <c:when test="${page.equals('index')}">
@@ -17,6 +17,14 @@
                     </c:when>
                     <c:otherwise>
                         <li><a href="/${base_url}/index?key=<%=session.getAttribute("key") %>">查看学生成绩</a></li>
+                    </c:otherwise>
+                </c:choose>
+                <c:choose>
+                    <c:when test="${page.equals('reply')}">
+                        <li id="chosenPage"><a href="/${base_url}/reply?key=<%=session.getAttribute("key") %>">反馈</a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li><a href="/${base_url}/reply?key=<%=session.getAttribute("key") %>">反馈</a></li>
                     </c:otherwise>
                 </c:choose>
             </ul><!-- /二级菜单 -->

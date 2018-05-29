@@ -27,6 +27,14 @@
                         <li ><a href="/${base_url}/importStudentInfo?key=<%=session.getAttribute("key") %>">学生信息导入</a></li>
                     </c:otherwise>
                 </c:choose>
+                <c:choose>
+                    <c:when test="${page.equals('getmessage')}">
+                        <li id="chosenPage"><a href="/${base_url}/getmessage?key=<%=session.getAttribute("key") %>">查看学生反馈</a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li><a href="/${base_url}/getmessage?key=<%=session.getAttribute("key") %>">查看学生反馈</a></li>
+                    </c:otherwise>
+                </c:choose>
             </ul><!-- /二级菜单 -->
         </li><!-- /学生信息管理li -->
 

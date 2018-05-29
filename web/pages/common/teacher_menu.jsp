@@ -50,6 +50,24 @@
                         <li><a href="/${base_url}/importStudentMark?key=<%=session.getAttribute("key") %>">学生成绩导入</a></li>
                     </c:otherwise>
                 </c:choose>
+
+                <c:choose>
+                    <c:when test="${page.equals('getCourseInfo')}">
+                        <li id="chosenPage"><a href="/${base_url}/getCourseInfo?key=<%=session.getAttribute("key") %>&grade=0&course=0">查看课程信息</a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li><a href="/${base_url}/getCourseInfo?key=<%=session.getAttribute("key") %>&grade=0&course=0">查看课程信息</a></li>
+                    </c:otherwise>
+                </c:choose>
+
+                <c:choose>
+                    <c:when test="${page.equals('getmessage')}">
+                        <li id="chosenPage"><a href="/${base_url}/getmessage?key=<%=session.getAttribute("key") %>">查看学生反馈</a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li><a href="/${base_url}/getmessage?key=<%=session.getAttribute("key") %>">查看学生反馈</a></li>
+                    </c:otherwise>
+                </c:choose>
             </ul><!-- /二级菜单 -->
         </li><!-- /成绩统计表li -->
     </ul><!-- /menu_ul -->

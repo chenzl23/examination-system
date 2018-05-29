@@ -630,4 +630,47 @@ public class SuperController {
         return "/common/error";
     }
 
+    @RequestMapping(value = "/getmessage",method = RequestMethod.GET)
+    public String getmessage(@RequestParam("key") String key,Model model,HttpSession session) {
+        if (!isLogin(session,key))
+        {
+            model.addAttribute("message","登录时间过期,请重新登录");
+            return "/common/error";
+        }
+
+        List messagelist = new ArrayList();
+        MessagesDao dao = new MessagesDao();
+        TeachinfoDao td = new TeachinfoDao();
+        StuinfoDao sd = new StuinfoDao();
+        List<Messages> mes ;
+        try {
+            mes = dao.searchMessage();
+            for(Messages data:mes)
+            {
+                List line = new ArrayList<>();
+                line.add(data.getFrom_id());
+                line.add(sd.searchSingleStuinfo(data.getFrom_id()).getName());
+                line.add(data.getMessage());
+                line.add(td.searchSingleTeachinfo(data.getTo_id()).getT_name());
+                messagelist.add(line);
+            }
+            model.addAttribute("list",messagelist);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        List<String> title = new ArrayList<>();
+        title.add("学号");
+        title.add("学生姓名");
+        title.add("反馈信息");
+        title.add("反馈老师");
+        model.addAttribute("grade",0);
+        model.addAttribute("course",0);
+        model.addAttribute("table_js","table_message.js");
+        model.addAttribute("title",title);
+        model.addAttribute("page","getmessage");
+        model.addAttribute("base_url","super");
+        return "/administrator/index";
+    }
+
 }
