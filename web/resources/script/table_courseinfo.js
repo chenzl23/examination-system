@@ -28,37 +28,17 @@ $(document).ready(function () {
         },
         columns: [
             {
-                field: 'id',
+                field: 'id'
             },
             {
-                field: 'name',
-                editable: {//启用输入框
-                    type: 'text',//input输入框类别
-                    validate: function (v) {
-                        if (v == '')
-                            return '输入不能为空';
-                    }
-                }
+                field: 'name'
+
             },
             {
-                field:'grade',
-                editable: {//启用输入框
-                    type: 'number',//input输入框类别
-                    validate: function (v) {
-                        if (v == '')
-                            return '输入不能为空';
-                    }
-                }
+                field:'grade'
             },
             {
-                field:'credit',
-                editable: {//启用输入框
-                    type: 'number',//input输入框类别
-                    validate: function (v) {
-                        if (v == '')
-                            return '输入不能为空';
-                    }
-                }
+                field:'credit'
             }
         ]
     });

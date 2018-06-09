@@ -37,25 +37,53 @@
 
   <div id="content">
         <div id="selectCourse" class="middle">
-          <span class="font">年级：</span>
-          <select id="grade" class="select">
-              <option value="2015">2015</option>
-              <option value="2016">2016</option>
-          </select>
-          <span class="font">课程：</span>
-          <select id="course" class="select">
-              <c:forEach items="${courselist}" var="course">
-                  <c:choose>
-                      <c:when test="${param.course == course.cno}">
-                          <option value="${course.cno}" selected>${course.c_name}</option>
-                      </c:when>
-                      <c:otherwise>
-                          <option value="${course.cno}">${course.c_name}</option>
-                      </c:otherwise>
-                  </c:choose>
-              </c:forEach>
-          </select>
-          <input id="btnConfirm" type="button" class="button" value="确定" >
+            <c:if test="${grade == 1}">
+                <span class="font">年级：</span>
+                <select id="grade" class="select">
+                    <c:choose>
+                        <c:when test="${param.grade == 2015}">
+                            <option value="2015" selected>2015</option>
+                        </c:when>
+                        <c:otherwise>
+                            <option value="2015">2015</option>
+                        </c:otherwise>
+                    </c:choose>
+                    <c:choose>
+                        <c:when test="${param.grade == 2016}">
+                            <option value="2016" selected>2016</option>
+                        </c:when>
+                        <c:otherwise>
+                            <option value="2016">2016</option>
+                        </c:otherwise>
+                    </c:choose>
+                    <c:choose>
+                        <c:when test="${param.grade == 2017}">
+                            <option value="2017" selected>2017</option>
+                        </c:when>
+                        <c:otherwise>
+                            <option value="2017">2017</option>
+                        </c:otherwise>
+                    </c:choose>
+                </select>
+            </c:if>
+            <c:if test="${course == 1}">
+                <span class="font">课程：</span>
+                <select id="course" class="select">
+                    <c:forEach items="${courselist}" var="course">
+                        <c:choose>
+                            <c:when test="${param.course == course.cno}">
+                                <option value="${course.cno}" selected>${course.c_name}</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${course.cno}">${course.c_name}</option>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </select>
+            </c:if>
+            <c:if test="${!(grade==0 && course==0)}">
+                <input id="btnConfirm" type="button" class="button" value="确定" >
+            </c:if>
         </div><!-- /search -->
 
         <div id="stuInfo" class="middle">

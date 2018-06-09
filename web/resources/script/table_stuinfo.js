@@ -59,11 +59,7 @@ $(document).ready(function () {
                 }
             },
             {
-                field: 'birth',
-                editable: {
-                    type: 'date',
-                    title: '生日'
-                }
+                field: 'birth'
             },
             {
                 field: 'tel',

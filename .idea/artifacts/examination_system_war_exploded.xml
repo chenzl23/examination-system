@@ -56,6 +56,8 @@
           <element id="file-copy" path="$PROJECT_DIR$/lib/commons-io-2.6.jar" />
           <element id="file-copy" path="$PROJECT_DIR$/lib/commons-collections4-4.1.jar" />
           <element id="file-copy" path="$PROJECT_DIR$/lib/xmlbeans-2.6.0.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/mail.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/activation.jar" />
         </element>
       </element>
     </root>

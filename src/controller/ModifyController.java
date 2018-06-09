@@ -5,6 +5,7 @@ import dao.MajorDao;
 import dao.StuCoursesDao;
 import dao.StuinfoDao;
 import dao.TeachinfoDao;
+import helper.MailHelper;
 import model.Major;
 import model.StuCourses;
 import model.Stuinfo;
@@ -78,6 +79,23 @@ public class ModifyController {
             return hashmap;
         }
         hashmap.put("status","success");
+
+        MailHelper mail = new MailHelper();
+        StuinfoDao std = new StuinfoDao();
+        try{
+             Stuinfo sinfo = std.searchSingleStuinfo(request.getParameter("s_no").toString());
+             System.out.println(sinfo.getEmail());
+             if (sinfo.getEmail()!="")
+             {
+                 String message = sinfo.getName()+"同学，您的课程" + request.getParameter("course_name").toString() +
+                         "成绩有更新，请登入系统查看";
+                 mail.sendmail(sinfo.getEmail(),sinfo.getName(),message);
+             }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
         return hashmap;
     }
 

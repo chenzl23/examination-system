@@ -21,6 +21,31 @@ $(document).ready(function(){
         $("#URLText").val(this.value);
     })
 
+    $("#btnLogout").click(function(){
+        var r=confirm("是否退出当前账号");
+        if (r==true)
+        {
+            //TODO:取消Session
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url:"/user/logout",
+                data: {},
+                success: function (data) {
+                    if (data.state == "true")
+                    {
+                        window.location.href="/login.html";
+                    }
+                    else
+                    {
+                        alert("注销失败");
+                    }
+                }
+            });
+            window.location.href="../../login.html";
+            //window.location.replace("../../login.html");
+        }
+    })
 
 
 

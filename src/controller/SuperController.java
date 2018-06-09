@@ -183,6 +183,7 @@ public class SuperController {
             return "/common/error";
         }
 
+        model.addAttribute("img","../../resources/image/学生信息导入格式.png");
         model.addAttribute("page","importStudentInfo");
         model.addAttribute("base_url","super");
         model.addAttribute("sub_url","stuinfo");
@@ -261,6 +262,7 @@ public class SuperController {
             model.addAttribute("message","登录时间过期,请重新登录");
             return "/common/error";
         }
+        model.addAttribute("img","../../resources/image/教师信息导入格式.png");
         model.addAttribute("page","importTeacher");
         model.addAttribute("base_url","super");
         model.addAttribute("sub_url","teainfo");
@@ -341,6 +343,7 @@ public class SuperController {
             model.addAttribute("message","登录时间过期,请重新登录");
             return "/common/error";
         }
+        model.addAttribute("img","../../resources/image/课程信息导入格式.png");
         model.addAttribute("page","importCourseInfo");
         model.addAttribute("base_url","super");
         model.addAttribute("sub_url","courseinfo");
@@ -431,6 +434,7 @@ public class SuperController {
             model.addAttribute("message","登录时间过期,请重新登录");
             return "/common/error";
         }
+        model.addAttribute("img","../../resources/image/选课信息导入格式.png");
         model.addAttribute("page","importCourseChosen");
         model.addAttribute("base_url","super");
         model.addAttribute("sub_url","coursechosen");

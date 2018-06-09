@@ -54,11 +54,11 @@ $(document).ready(function () {
             },
             {
                 field: 's_no',
-                title:'选课编码'
+                title:'学号'
             },
             {
                 field: 's_name',
-                title:'学号'
+                title:'姓名'
             },
             {
                 field: 'term',

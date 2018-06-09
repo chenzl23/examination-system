@@ -39,7 +39,7 @@
           </div>
           <div id="example">
             <p class="remind">Excel表格格式如下：</p>
-            <img src="../../resources/image/学生信息导入格式.png" width="700px">
+            <img src="${img}" width="1000px">
           </div>
           
         </div><!-- /importStudent -->

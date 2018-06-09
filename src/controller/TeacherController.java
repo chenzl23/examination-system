@@ -107,6 +107,8 @@ public class TeacherController {
         title.add("需获学分");
         title.add("入学年份");
         title.add("专业");
+        model.addAttribute("grade",1);
+        model.addAttribute("course",1);
         model.addAttribute("table_js","table_stuinfo.js");
         model.addAttribute("title",title);
         model.addAttribute("page","index");
@@ -123,7 +125,7 @@ public class TeacherController {
             model.addAttribute("message","登录时间过期,请重新登录");
             return "/common/error";
         }
-
+        model.addAttribute("img","../../resources/image/学生信息导入格式.png");
         model.addAttribute("page","importStudentInfo");
         model.addAttribute("base_url","teacher");
         model.addAttribute("sub_url","stuinfo");
@@ -142,7 +144,6 @@ public class TeacherController {
             model.addAttribute("message","登录时间过期,请重新登录");
             return "/common/error";
         }
-
         List courselist = new ArrayList();
         List<StuCourses> courses;
         StuCoursesDao dao = new StuCoursesDao();
@@ -209,6 +210,8 @@ public class TeacherController {
         title.add("实验成绩");
         title.add("总评成绩");
         title.add("选课状态");
+        model.addAttribute("grade",1);
+        model.addAttribute("course",1);
 
         model.addAttribute("table_js","table_mark.js");
         model.addAttribute("title",title);
@@ -227,6 +230,7 @@ public class TeacherController {
             model.addAttribute("message","登录时间过期,请重新登录");
             return "/common/error";
         }
+        model.addAttribute("img","../../resources/image/学生成绩导入格式.png");
 
         model.addAttribute("page","importStudentMark");
         model.addAttribute("base_url","teacher");
